@@ -1,0 +1,37 @@
+#!/bin/bash
+
+HOST=$1
+
+# Create Network
+curl $HOST/networks/15                   \
+     -X PUT                              \
+     -H "Content-Type: application/json" \
+     -i                                  \
+     -d                                  \
+'{
+  "name": "Rakuten",
+  "variant": "rakuten",
+  "variations": {
+    "api-host": "sftp.halorium.com",
+    "days-per-request": "1",
+    "days-to-load": "7",
+    "rate-interval": "10s",
+    "rate-quantity": "1"
+  }
+}'
+
+# Create Network Account - Rakuten UK
+curl $HOST/networks/15/accounts/19       \
+     -X PUT                              \
+     -H "Content-Type: application/json" \
+     -i                                  \
+     -d                                  \
+'{
+  "name": "Rakuten - UK",
+  "variant": "rakuten",
+  "variations": {
+    "currency": "GBP",
+    "password": "password",
+    "username": "1234567"
+  }
+}'

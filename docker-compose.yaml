@@ -1,0 +1,187 @@
+version: '2'
+services:
+  authentication-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: authentication/api/docker-compose.yaml
+      service: authentication-api
+
+  cycler-service:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: cycler/service/docker-compose.yaml
+      service: cycler-service
+
+  http-spec-service:
+    extends:
+      file: http-spec/service/docker-compose.yaml
+      service: http-spec-service
+
+  identities-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: identities/api/docker-compose.yaml
+      service: identities-api
+
+  migrator-service:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: migrator/service/docker-compose.yaml
+      service: migrator-service
+
+  mock-sns-and-sqs-api:
+    env_file: .env
+    extends:
+      file: mock/sns-and-sqs/api/docker-compose.yaml
+      service: mock-sns-and-sqs-api
+
+  networks-affiliate-window-mock-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: networks/affiliate-window/mock/api/docker-compose.yaml
+      service: networks-affiliate-window-mock-api
+
+  networks-affilinet-mock-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: networks/affilinet/mock/api/docker-compose.yaml
+      service: networks-affilinet-mock-api
+
+  networks-booking-mock-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: networks/booking/mock/api/docker-compose.yaml
+      service: networks-booking-mock-api
+
+  networks-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: networks/api/docker-compose.yaml
+      service: networks-api
+    depends_on:
+      - mock-sns-and-sqs-api
+    ports:
+      - "3000:80"
+
+  networks-worker:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: |
+                   -----BEGIN RSA PRIVATE KEY-----
+                   MIIJKgIBAAKCAgEAwlEtDfohg6JNax6WuWGM6ThCGFHjK1Bu9R1uHczMZKw0ajU7
+                   GK4GiOatT0kebd5X2CD87tpDQ6/L9iNlZQSNNB9MV5hOe6OtIwukd6KBHMfxUQQh
+                   w+XUu9D7rkQCh/Y+Iiylq7r8WD3SLy9w1pk9tnnnotlyU5yC5rhzJ72NrIDpLMpa
+                   u7fjAuW53FVjmLAXpbHvZ08fsZgkJyPo+Rvd7/w+TzyEI4OL4xbpBeWWqHpRueBs
+                   4IID6YWD7xOKAMShd6poMk2NcH6AmP5ps2w/ld/M8oFixneMwgBvpRXIzojkhIZK
+                   CxQmrpmAxRUlcTIKy/PhrN0xwHlPbO/gq2e3Kt5AQdy8cvA79mmYEIBEdHoDb2/O
+                   kVHcmRSk/4BlR0Y0H/5HpwPeeVHNeqrIOU3iePXMGmKGFe2vAkmAVNv8zk+rc6iw
+                   BsC1Skd9mMuplK30pnZb9LjK61iJXcTj3t0esxXdptnY1M7a8dFGRR8qN6lZvQKp
+                   zr//nJ+j09tCPm2e2V7o7r8ppcTbRkMhm67PDwVtJPLveTbye03l0kbuM+WWfgK2
+                   eWq3s1YLNAAkUlX/4rS5aHR+Yi6HfjUtqjyqkHECOqqeF4nd8yfbvFXvdmjvZibM
+                   jD57GtZfHjsfjInk4NkDFhzfK1p4zBppUcj6xruE4G3ytI8UMddWqiq02gcCAwEA
+                   AQKCAgEAjrtn18tykKlIKrXmSrdP9QNg8VI9BlTnm96JQxRq0kv3mEgPZ5p0rFyc
+                   0w9HbbaTWespPx1NqUtZCyyGzwPf4HhY8EKs636Xr5Veso3IPubS6Aqb7rREZc0l
+                   AaVtIoeKrjmTW6hWsU5/tC8puEgJn569uc31f1sIgAbed0Nx7FMoc8ETkq2I71jl
+                   A+Yo6T/3rrsbugvRoPa7H5DuEQUaKaxj7HnsKdX3i9AJTE6PMqPeoiUqdGKsEv0C
+                   ozr79IJ6hFbEgKacjRQuy7Kc27FYp3MjrMHDVzr7RolheKaewK6nBH1LqAWeQEP6
+                   5UkaHqJ+cb9rdjln0RSKdd9hbSYa0PboCaPKsd89VTg9gRTTx56TzCjY1NwHPY6X
+                   1p0/lxX6qo9H9vZS6+PQrUyuP9hgYppqGq5n1FxH/P7mRzrq3p5omP+Vc8Xbk5TC
+                   YZOFQfxudjz7gxa8KSrFVVQHUH5iF/NM8S9bUUABktjkiHeXlmKJNvHNLERXpVtj
+                   Wum2e/l11iI1NfhTKpXRrKgYylO7PIHrqkzOeviyZIkxRnm0wS2sTZn8kXCXjnqj
+                   rWkYGIE7Mmzk7T58mDtsKqupBaqGvKX5VXb9ytxU30bk/ZWfk9e3kVPPa6SObCCO
+                   S9z7jRp8YbIX3n+hf+IkeH+k4c8RUm/6HEhWViKil66il0US90ECggEBAO3TRyx9
+                   hxGxYPC8Xcge3BN4OcRRiGIN9jekZEGwRS4vS4/rOFXOXhnDijE6aV8gwEn3qMNf
+                   H5PMYtnqSkbvidh20xiY94gx07AMtxXycMsNgLahnsAr5s3arEMAlz7dRtFANaRo
+                   E7YkIJvfpndVQ5uv83hKqNIGYeiJnEDsx4OGx1I3qXpd8315+VBQxTGsTgwlkm2x
+                   qa1sc6gMGGgOgcy6A+pgb6HJWe7fxkXXKORFdPJ0PmYAqmRh861CMxj9cDDyDWXs
+                   F5wPW6fu7kIfRIsSG34rNxqa9sndozu742tjpDCB7x0cDIl+GzgYTm/9uWzSP1C8
+                   6vPKoVVuNII2UaECggEBANEquF/uvUYfem7EJ2dWFlEStOic3/vtHDK5sNBkCRmO
+                   m/nn+pvzXfiTsG3V662kiWKdNhWvq/KDbikXEdW5AdtnqUcpsQyUiWurUvCV9tb7
+                   qRVlUq2Vc4hdzp2mOiOKhtsIiD03yQzqIXg9bNTKFApDCtAQBFa6Bv4q4G5SDVPA
+                   cZoa6Q7oiTl2L9g7/00Z50s/0U/nW7TTVzuhj0+v7j2cZPXGIJpxEwTkteH3FoQX
+                   t78tt37YC2XpgEzW1H+CcCCMmSK0//Rx+K+ppce31LNBRL+cPwia1tUjdmVoBVey
+                   ViJIPJZUL4AmbXO5AhfExmFrV1CT+0gUQCGI9e2zWqcCggEBAOctXd0QdDAtpRa9
+                   c8fov3KphjWgL5tpCPKTeOUljEnVrXTLaCp4fJ48pmMt7WmL836zH7gyCgboQRqk
+                   lOkZRXxGHPKnFs6r6KMT6RCLZzrp+DkPJ7qTsjpeGt7SfzKbc5BKAxq6FJcTzSLX
+                   pwAOwLZgtaEzqaDmlVuuEFZIE7R1WeFAvBx3oQ1SeJequ9SKMh+6kfjRHye16ULr
+                   5vmXSHMSSmYUsc6pZCNAIIKZIGWsYn6folwSv47ubCj51aOwD9N0JrPxaA3KHAVE
+                   yxM5Q66PvmvJZDoXcldNe7O/8tPbuqlwVFeOgV1RWPIRJoXUM99lDCjWSukKCgN6
+                   Kc59MKECggEBAJHiVtfp/i8DU3Qf8U+cdlIzVuQKTho6hPlIE+80ZjhiA52oU10j
+                   vz3ZXCsvEYJ5iKyz833qmWW6j0GvamwC7i2lviX5CRg6HSJwSpesMI4+1e4rTh/t
+                   ZbgNnUbNIi2Zt3bbG5J+7wXH4nInfVloW9PQcKEvGqeWdbweEYxARDVOuqz96eDR
+                   BKyEJtiM+AJBd9U+/HDbb1XONUBM7VRp4yMriir09dZh2R8HmWex2w1kMW7wptOc
+                   QU7iLe7pwynvwt6g0UmorgBC4W07SHnkWEBx3E473qbUv9PGORR/GYLRykt80G0U
+                   6FBb/OjCd5g2URqvMCXuIEtkfFonWUdhWW8CggEAHv4V2eUEKjg+2pp9FEf01eqz
+                   ZAbjOvM0o825hO0nBDjdnZj2J1uX+8uvkHVPPZvYXqnrVYx1HpcMU17aQMe4KCok
+                   Clw9UyM8qdqm4n57X6iIVKudscpxXahrRrHU+HivsP+Bw7NYSIxtffYdv7NxsXlz
+                   f52Fkusu2OBlFwoN886I8q8Uj/muA9h2a3LlLlzsp3jQUIQhjOgsqrcsJNAe9P+k
+                   zkNRFu9Nb3aT573FMO4QTbpdpslaeIzoaSboqPyPkZKkg6GM+1gjwWcvVyc1oEXQ
+                   +/xPrVDxhTpP3OOmJ7ZXc6+Mtd+z0Cvc5MHDa+9jq+BG2Z2x8yFjirxhmJ61iA==
+                   -----END RSA PRIVATE KEY-----
+    extends:
+      file: networks/worker/docker-compose.yaml
+      service: networks-worker
+    depends_on:
+      - mock-sns-and-sqs-api
+
+  panic-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: panic/api/docker-compose.yaml
+      service: panic-api
+
+  postgres:
+    extends:
+      file: postgres/docker-compose.yaml
+      service: postgres
+
+  roles-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+      IN_SFTP_KEY: NOTUSED
+    extends:
+      file: roles/api/docker-compose.yaml
+      service: roles-api
+
+  status-api:
+    env_file: .env
+    environment:
+      IN_GIT_SHA:
+    extends:
+      file: status/api/docker-compose.yaml
+      service: status-api
+
+  sftp-server:
+    env_file: .env
+    extends:
+      file: sftp-server/docker-compose.yaml
+      service: sftp-server

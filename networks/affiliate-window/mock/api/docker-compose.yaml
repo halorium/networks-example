@@ -1,0 +1,5 @@
+version: '2'
+services:
+  networks-affiliate-window-mock-api:
+    image: networks-example/networks-affiliate-window-mock-api
+    read_only: true

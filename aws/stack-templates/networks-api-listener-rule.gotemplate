@@ -1,0 +1,30 @@
+{{{define "networks-api-listener-rule"}}}
+"NetworksApiListenerRule": {
+  "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+  "DependsOn": [
+    "ListenerTls"
+  ],
+  "Properties": {
+    "Actions": [
+      {
+        "TargetGroupArn": {
+          "Ref": "NetworksApiTargetGroup"
+        },
+        "Type": "forward"
+      }
+    ],
+    "Conditions": [
+      {
+        "Field": "path-pattern",
+        "Values": [
+          "/networks*"
+        ]
+      }
+    ],
+    "ListenerArn": {
+      "Ref": "ListenerTls"
+    },
+    "Priority": 2
+  }
+}
+{{{end}}}

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ "$IN_GIT_BRANCH" = "master" ]]; then
+  >&2 echo IN_GIT_BRANCH=master, abort\!
+  exit 2
+fi
+
+>&2 echo deleting stack bucket directory...
+
+OUTPUT=$(
+  aws               \
+    s3              \
+      rm            \
+        --recursive \
+          s3://halorium.networks-example/$IN_GIT_BRANCH 2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

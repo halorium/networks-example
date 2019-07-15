@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PREFIX=.semaphore-install-dependencies
+
+TODAY=$PREFIX-$(semaphores/today) || exit 1
+
+[[ -e $TODAY ]] && exit 1
+
+rm -f $PREFIX-*
+
+touch $TODAY
+
+exit 0

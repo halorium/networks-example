@@ -1,0 +1,24 @@
+{{{define "db-subnet-group"}}}
+"DBSubnetGroup": {
+  "Type": "AWS::RDS::DBSubnetGroup",
+  "Properties": {
+    "DBSubnetGroupDescription": {
+      "Ref": "AWS::StackName"
+    },
+    "SubnetIds": [
+      {
+        "Ref": "Subnet0"
+      },
+      {
+        "Ref": "Subnet1"
+      },
+      {
+        "Ref": "Subnet2"
+      },
+      {
+        "Ref": "Subnet3"
+      }
+    ]
+  }
+}
+{{{end}}}

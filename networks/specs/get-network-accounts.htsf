@@ -1,0 +1,28 @@
+> GET http://networks-api/networks/123/accounts HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "03e1b663b2043893813c16c3ffffb2a546a6de647a82f752ebb4528fc5b0bb2f",
+<       "network-account-id": "456",
+<       "network-id": "123",
+<       "variation-version": "ebf104edc4dfe960d52b4727ad4dc37a50ed46eb96dbb8b590edfe80f29f8a1b"
+<     },
+<     "body": {
+<       "name": "Rakuten - UK",
+<       "variant": "rakuten",
+<       "variations": {
+<         "currency": "GBP",
+<         "password": "password",
+<         "username": "username"
+<       }
+<     }
+<   }
+< ]

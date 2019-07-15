@@ -1,0 +1,5 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <CredentialToken xmlns="http://affilinet.framework.webservices/Svc">6c098c26-34a3-4f19-ae1c-1c500868c7d2</CredentialToken>
+  </s:Body>
+</s:Envelope>

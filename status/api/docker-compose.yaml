@@ -1,0 +1,5 @@
+version: '2'
+services:
+  status-api:
+    image: networks-example/status-api
+    read_only: true

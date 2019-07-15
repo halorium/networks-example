@@ -1,0 +1,56 @@
+#!/bin/bash
+
+time (
+  if [[ "$CRANK_HOST" = "" ]]; then
+    (
+      validate/branch-name             || exit 1
+      validate/go-version              || exit 1
+      ./install-dependencies           || exit 1
+      validate/code                    || exit 1
+
+      # Don't stop the services everytime
+      # ./stop                         || exit 1
+
+      # prune-containers now only prunes migrator and http-spec (stopped containers)
+      docker/prune-containers          || exit 1
+
+      # we still need to prune database containers to wipe the data
+      docker/prune-database-containers || exit 1
+
+      # no need to build mock services separate from other services
+      # ./build-mock-services          || exit 1
+
+      # only build migrator and http-spec if they changed
+      docker/build-migrator-service         || exit 1
+      docker/build-http-spec-service        || exit 1
+
+      # don't prune images so we don't have to build them everytime
+      # docker/prune-service-images    || exit 1
+      # ./build-services               || exit 1
+
+      # check if files changed and build the services than need to be rebuilt
+      ./build-changed-services         || exit 1
+
+      ./start                          || exit 1
+      ./migrate                        || exit 1
+      validate/functionality           || exit 1
+
+      # don't stop them everytime so we don't have to start them everytime
+      # ./stop                         || exit 1
+    ) || (
+      >&2 echo
+      >&2 echo $'\e[31m'CRANK FAILED :-\( $'\e[0m'🤔
+      exit 1
+    ) || exit 1
+
+    >&2 echo
+    >&2 echo $'\e[32m'SUCCESSFULLY CRANKED\! :-\) $'\e[0m'😎
+    >&2 echo
+  else
+    validate/branch-name   || exit 1
+    crank-host/synchronize || exit 1
+    crank-host/crank       || exit 1
+  fi
+) || exit 1
+
+exit 0

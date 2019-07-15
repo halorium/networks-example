@@ -1,0 +1,13 @@
+{{{define "public-security-group"}}}
+"PublicSecurityGroup": {
+  "Type": "AWS::EC2::SecurityGroup",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "GroupDescription": {
+      "Fn::Sub": "${AWS::StackName}-public"
+    }
+  }
+}
+{{{end}}}

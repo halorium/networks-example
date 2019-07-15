@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TEMPLATE_PATHNAME=$IN_ARTIFACTS_PATH/$IN_GIT_BRANCH
+
+go run aws/stack-template-renderer/main.go   | \
+tee "$TEMPLATE_PATHNAME.raw"                 | \
+jq -c -e '.' > "$TEMPLATE_PATHNAME.template" || exit 1
+
+exit 0

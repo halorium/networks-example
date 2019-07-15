@@ -1,0 +1,15 @@
+#!/bin/bash
+
+>&2 echo validating go version...
+
+if [[ "$(go/current-version)" != "$(go/desired-version)" ]]; then
+  >&2 echo local go $(go/current-version) \!= desired go $(go/desired-version)
+  exit 1
+fi
+
+if [[ "$(travis-ci/go-version)" != "$(go/desired-version)" ]]; then
+  >&2 echo travis go $(travis-ci/go-version) \!= desired go $(go/desired-version)
+  exit 1
+fi
+
+exit 0

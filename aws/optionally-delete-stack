@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ "$IN_GIT_BRANCH" = "master" ]]; then
+  >&2 echo on master, not deleting...
+
+  exit 2
+fi
+
+if [[ $(git/head-comment) != *\[delete\] ]]; then
+  >&2 echo comment does not end with \[delete\], not deleting...
+
+  exit 2
+fi
+
+>&2 echo deleting...
+
+aws/delete-dns-for-branch-name    || exit 1
+aws/delete-stack-bucket-directory || exit 1
+aws/delete-stack                  || exit 1
+aws/wait-for-stack-to-transition  || exit 1
+aws/prune-certificates-from-acm   # OK to fail
+aws/prune-repositories            # OK to fail
+
+exit 0

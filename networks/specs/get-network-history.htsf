@@ -1,0 +1,49 @@
+> GET http://networks-api/networks/123/history HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Network-Id: 123
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "8a332ecc69c93dfe9e562a6529d8f766d798dec7bcad62778a33c690693b2171",
+<       "network-id": "123",
+<       "variation-version": "5efb5d7fd85a58411d5ee26b3f89c3cd51264941ac37d82409f19934ef8b5eef"
+<     },
+<     "body": {
+<       "name": "Rakuten",
+<       "variant": "rakuten",
+<       "variations": {
+<         "api-host": "sftp-server",
+<         "days-per-request": "1",
+<         "days-to-load": "45",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "89868797c4422e226d785e0cb6050ed3b113f1d49b0c2c4da16fed982bd7429b",
+<       "network-id": "123",
+<       "variation-version": "5efb5d7fd85a58411d5ee26b3f89c3cd51264941ac37d82409f19934ef8b5eef"
+<     },
+<     "body": {
+<       "name": "Rakuten Old",
+<       "variant": "rakuten",
+<       "variations": {
+<         "api-host": "sftp-server",
+<         "days-per-request": "1",
+<         "days-to-load": "45",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   }
+< ]

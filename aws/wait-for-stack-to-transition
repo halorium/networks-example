@@ -1,0 +1,66 @@
+#!/bin/bash
+
+>&2 echo waiting for stack to transition...
+
+while true; do
+  OUTPUT=$(
+    aws              \
+      --output json  \
+      cloudformation \
+        describe-stacks --stack-name $IN_GIT_BRANCH 2>&1
+  )
+
+  if [[ "$?" -ne "0" ]]; then
+    if [[ "$OUTPUT" = *"ValidationError"* ]]; then
+      if [[ "$OUTPUT" = *"No updates are to be performed." ]]; then
+        >&2 echo no updates are to be performed...
+
+        exit 0
+      fi
+
+      if [[ "$OUTPUT" = *"does not exist" ]]; then
+        >&2 echo stack does not exist...
+
+        exit 0
+      fi
+
+      echo "$OUTPUT"
+
+      exit 1
+    fi
+
+    sleep 10
+
+    continue
+  fi
+
+  STACK_DESCRIPTION=$(
+    echo "$OUTPUT" | jq --raw-output '.Stacks[0]'
+  )
+
+  STACK_STATUS=$(
+    echo $STACK_DESCRIPTION | \
+    jq --raw-output '.StackStatus'
+  )
+
+  >&2 echo transitioning: $STACK_STATUS...
+
+  [[ "$STACK_STATUS" = "CREATE_COMPLETE" ]]             && exit 0 # exit successfully
+  [[ "$STACK_STATUS" = "CREATE_FAILED" ]]               && exit 1
+
+  [[ "$STACK_STATUS" = "DELETE_COMPLETE" ]]             && exit 0 # exit successfully
+  [[ "$STACK_STATUS" = "DELETE_FAILED" ]]               && exit 1
+
+  [[ "$STACK_STATUS" = "ROLLBACK_COMPLETE" ]]           && exit 1
+  [[ "$STACK_STATUS" = "ROLLBACK_FAILED" ]]             && exit 1
+  [[ "$STACK_STATUS" = "ROLLBACK_IN_PROGRESS" ]]        && exit 1
+
+  [[ "$STACK_STATUS" = "UPDATE_COMPLETE" ]]             && exit 0 # exit successfully
+  [[ "$STACK_STATUS" = "UPDATE_ROLLBACK_COMPLETE" ]]    && exit 1
+  [[ "$STACK_STATUS" = "UPDATE_ROLLBACK_FAILED" ]]      && exit 1
+  [[ "$STACK_STATUS" = "UPDATE_ROLLBACK_IN_PROGRESS" ]] && exit 1
+
+  sleep 10
+done || exit 1
+
+exit 0

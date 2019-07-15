@@ -1,0 +1,5 @@
+version: '2'
+services:
+  authentication-api:
+    image: networks-example/authentication-api
+    read_only: true

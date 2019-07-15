@@ -1,0 +1,5 @@
+#!/bin/bash
+
+http-spec roles/specs/put-role.htsf || exit 1
+
+exit 0

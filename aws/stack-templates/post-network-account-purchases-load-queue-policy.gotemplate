@@ -1,0 +1,33 @@
+{{{define "post-network-account-purchases-load-queue-policy"}}}
+"PostNetworkAccountPurchasesLoadQueuePolicy": {
+  "DependsOn": [
+    "PostNetworkAccountPurchasesLoadQueue"
+  ],
+  "Type": "AWS::SQS::QueuePolicy",
+  "Properties": {
+    "PolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "sns.amazonaws.com"
+          },
+          "Action": "sqs:SendMessage",
+          "Resource": {
+            "Fn::GetAtt": [
+              "PostNetworkAccountPurchasesLoadQueue",
+              "Arn"
+            ]
+          }
+        }
+      ]
+    },
+    "Queues": [
+      {
+        "Ref": "PostNetworkAccountPurchasesLoadQueue"
+      }
+    ]
+  }
+}
+{{{end}}}

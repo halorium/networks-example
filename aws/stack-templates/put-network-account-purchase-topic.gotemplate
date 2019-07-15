@@ -1,0 +1,13 @@
+{{{define "put-network-account-purchase-topic"}}}
+"PutNetworkAccountPurchaseTopic": {
+  "Type": "AWS::SNS::Topic",
+  "Properties": {
+    "DisplayName": {
+      "Fn::Sub": "${AWS::StackName}-put-network-account-purchase"
+    },
+    "TopicName": {
+      "Fn::Sub": "${AWS::StackName}-put-network-account-purchase"
+    }
+  }
+}
+{{{end}}}

@@ -1,0 +1,6 @@
+{{{define "task-log-configuration"}}}
+          "LogDriver": "syslog",
+          "Options": {
+          	"syslog-facility": "local2"
+          }
+{{{end}}}

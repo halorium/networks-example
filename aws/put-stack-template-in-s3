@@ -1,0 +1,18 @@
+#!/bin/bash
+
+TEMPLATE_PATHNAME=$IN_ARTIFACTS_PATH/$IN_GIT_BRANCH.template
+
+S3_URI=s3://halorium.networks-example/$IN_GIT_BRANCH/$IN_GIT_SHA.template
+
+>&2 echo puting stack template in s3...
+
+OUTPUT=$(
+  aws                                   \
+    s3                                  \
+      cp                                \
+        --content-type application/json \
+        $TEMPLATE_PATHNAME              \
+        $S3_URI 2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

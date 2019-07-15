@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ "$REVISIONS" = "" ]]; then
+  >&2 echo usage: REVISIONS=25 $0
+
+  REVISIONS=15
+
+  >&2 echo
+  >&2 echo proceeding with revisions: $REVISIONS
+fi
+
+git rebase --interactive --autosquash HEAD~$REVISIONS || exit 1
+
+exit 0

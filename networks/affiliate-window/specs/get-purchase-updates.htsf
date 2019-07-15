@@ -1,0 +1,198 @@
+> GET http://networks-api/networks/6/accounts/13/purchase-updates?created-at=⧈YYYY-MM-DD⧈ HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "7841fe7a76d6cd5c57cc91d5e17625534c622d1e347ea7be5770c167354d6311",
+<       "network-account-id": "13",
+<       "network-id": "6",
+<       "purchase-id": "272955205",
+<       "variation-version": "624d30e2f21b77e27e9df933bf04272b0343faff7644b72f2f7e451baf326f0d"
+<     },
+<     "body": {
+<       "click-id": "t594514235m",
+<       "commission-amount": "0.4",
+<       "currency": "GBP",
+<       "date": "2017-01-01T16:40:00.000000Z",
+<       "order-id": "272955205",
+<       "sale-amount": "13.33",
+<       "status": "OPEN",
+<       "variant": "affiliate-window",
+<       "variations": {
+<         "advertiser-country": "GB",
+<         "advertiser-id": "5678",
+<         "amend-reason": "Part Returned",
+<         "amended": "true",
+<         "awin-commission-amount": {
+<           "amount": "0.4",
+<           "currency": "GBP"
+<         },
+<         "awin-sale-amount": {
+<           "amount": "13.33",
+<           "currency": "GBP"
+<         },
+<         "click-date": "2017-04-07T22:12:00",
+<         "click-device": "Apple Mac",
+<         "click-refs": {
+<           "click-ref": "t594514235m"
+<         },
+<         "commission-status": "approved",
+<         "id": "272955205",
+<         "lapse-time": "66514",
+<         "old-commission-amount": {
+<           "amount": "0.96",
+<           "currency": "GBP"
+<         },
+<         "old-sale-amount": {
+<           "amount": "32.08",
+<           "currency": "GBP"
+<         },
+<         "paid-to-publisher": "false",
+<         "payment-id": "0",
+<         "publisher-id": "68727",
+<         "publisher-url": "http://cashback.completesavings.co.uk/info/83484/15356/asos/afsrc=1",
+<         "site-name": "Incentive Networks",
+<         "transaction-date": "2017-01-01T16:40:00",
+<         "transaction-device": "Apple Mac",
+<         "transaction-parts": [
+<           {
+<             "amount": "13.33",
+<             "commission-group-id": "64067"
+<           }
+<         ],
+<         "transaction-query-id": "0",
+<         "type": "Commission group transaction",
+<         "url": "http://www.networksexample.com",
+<         "validation-date": "2017-05-31T16:10:00",
+<         "voucher-code-used": "true"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "49da8dec46b7de76842a1b6acf1cedfcfc8772fcb63ec781f814e4848fcf50cb",
+<       "network-account-id": "13",
+<       "network-id": "6",
+<       "purchase-id": "284101966",
+<       "variation-version": "bb86344de6efa1f3809e2b52716b51080d9ac3fc1401f67ec491741ada88db8d"
+<     },
+<     "body": {
+<       "click-id": "t594746521m",
+<       "commission-amount": "-2.92",
+<       "currency": "GBP",
+<       "date": "2017-01-01T09:06:00.000000Z",
+<       "order-id": "284101966",
+<       "sale-amount": "-58.4",
+<       "status": "DECLINED",
+<       "variant": "affiliate-window",
+<       "variations": {
+<         "advertiser-country": "GB",
+<         "advertiser-id": "1685",
+<         "amended": "false",
+<         "awin-commission-amount": {
+<           "amount": "2.92",
+<           "currency": "GBP"
+<         },
+<         "awin-sale-amount": {
+<           "amount": "58.4",
+<           "currency": "GBP"
+<         },
+<         "click-date": "2017-05-01T09:03:00",
+<         "click-device": "iPhone",
+<         "click-refs": {
+<           "click-ref": "t594746521m"
+<         },
+<         "commission-status": "declined",
+<         "decline-reason": "Order not complete - Customer returned order",
+<         "id": "284101966",
+<         "lapse-time": "167",
+<         "old-commission-amount": {},
+<         "old-sale-amount": {},
+<         "paid-to-publisher": "false",
+<         "payment-id": "0",
+<         "publisher-id": "68727",
+<         "publisher-url": "http://cashback.completesavings.co.uk/info/82267/4774/m-co/afsrc=1",
+<         "site-name": "Incentive Networks",
+<         "transaction-date": "2017-01-01T09:06:00",
+<         "transaction-device": "iPhone",
+<         "transaction-parts": [
+<           {
+<             "amount": "58.4",
+<             "commission-group-id": "6910"
+<           }
+<         ],
+<         "transaction-query-id": "0",
+<         "type": "Commission group transaction",
+<         "url": "http://www.networksexample.com",
+<         "validation-date": "2017-06-01T14:58:00",
+<         "voucher-code-used": "false"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "aa9b124c1fa4bd9182930223025c66ecd0d23098acf50f56412fbdda18e8a7bc",
+<       "network-account-id": "13",
+<       "network-id": "6",
+<       "purchase-id": "284216525",
+<       "variation-version": "f1a1b3ed089ce66f0ada5bd9520e1df32de684a7261582c10166644762ab91fd"
+<     },
+<     "body": {
+<       "click-id": "t594751301m",
+<       "commission-amount": "0.12",
+<       "currency": "GBP",
+<       "date": "2017-01-01T18:23:00.000000Z",
+<       "order-id": "284216525",
+<       "sale-amount": "8.32",
+<       "status": "OPEN",
+<       "variant": "affiliate-window",
+<       "variations": {
+<         "advertiser-country": "GB",
+<         "advertiser-id": "1599",
+<         "amended": "false",
+<         "awin-commission-amount": {
+<           "amount": "0.12",
+<           "currency": "GBP"
+<         },
+<         "awin-sale-amount": {
+<           "amount": "8.32",
+<           "currency": "GBP"
+<         },
+<         "click-date": "2017-05-01T18:18:00",
+<         "click-device": "Android Tablet",
+<         "click-refs": {
+<           "click-ref": "t594751301m"
+<         },
+<         "commission-status": "pending",
+<         "id": "284216525",
+<         "lapse-time": "325",
+<         "old-commission-amount": {},
+<         "old-sale-amount": {},
+<         "paid-to-publisher": "false",
+<         "payment-id": "0",
+<         "publisher-id": "68727",
+<         "site-name": "Incentive Networks",
+<         "transaction-date": "2017-01-01T18:23:00",
+<         "transaction-device": "Android Tablet",
+<         "transaction-parts": [
+<           {
+<             "amount": "8.32",
+<             "commission-group-id": "5724"
+<           }
+<         ],
+<         "transaction-query-id": "0",
+<         "type": "Commission group transaction",
+<         "url": "http://www.networksexample.com",
+<         "voucher-code-used": "false"
+<       }
+<     }
+<   }
+< ]

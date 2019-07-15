@@ -1,0 +1,103 @@
+#!/bin/bash
+
+if [[ "$AWS_ACCESS_KEY_ID" = "" ]]; then
+  >&2 echo AWS_ACCESS_KEY_ID is not set
+  exit 1
+fi
+
+if [[ "$AWS_SECRET_ACCESS_KEY" = "" ]]; then
+  >&2 echo AWS_SECRET_ACCESS_KEY is not set
+  exit 1
+fi
+
+if [[ "$AWS_REGION" = "" ]]; then
+  >&2 echo AWS_REGION is not set
+  exit 1
+fi
+
+if [[ "$AWS_DEFAULT_REGION" = "" ]]; then
+  >&2 echo AWS_DEFAULT_REGION is not set
+  exit 1
+fi
+
+if [[ "$IN_ARTIFACTS_PATH" = "" ]]; then
+  >&2 echo IN_ARTIFACTS_PATH is not set
+  exit 1
+fi
+
+if [[ "$IN_DOCKER_REGISTRY" = "" ]]; then
+  >&2 echo IN_DOCKER_REGISTRY is not set
+  exit 1
+fi
+
+if [[ "$IN_GIT_BRANCH" = "" ]]; then
+  >&2 echo IN_GIT_BRANCH is not set
+  exit 1
+fi
+
+if [[ "$IN_GIT_SHA" = "" ]]; then
+  >&2 echo IN_GIT_SHA is not set
+  exit 1
+fi
+
+if [[ "$IN_JWT_SIGNING_KEY" = "" ]]; then
+  >&2 echo IN_JWT_SIGNING_KEY is not set
+  exit 1
+fi
+
+if [[ "$IN_LOGGLY_TOKEN" = "" ]]; then
+  >&2 echo IN_LOGGLY_TOKEN is not set
+  exit 1
+fi
+
+if [[ "$IN_LOG_COLORIZATION" = "" ]]; then
+  >&2 echo IN_LOG_COLORIZATION is not set
+  exit 1
+fi
+
+if [[ "$IN_LOG_SERIALIZATION" = "" ]]; then
+  >&2 echo IN_LOG_SERIALIZATION is not set
+  exit 1
+fi
+
+if [[ "$IN_SFTP_KEY" = "" ]]; then
+  >&2 echo IN_SFTP_KEY is not set
+  exit 1
+fi
+
+if [[ "$IN_SYSDIG_TOKEN" = "" ]]; then
+  >&2 echo IN_SYSDIG_TOKEN is not set
+  exit 1
+fi
+
+if [[ "$IN_PGUSER" = "" ]]; then
+  >&2 echo IN_PGUSER is not set
+  exit 1
+fi
+
+if [[ "$IN_PGPASSWORD" = "" ]]; then
+  >&2 echo IN_PGPASSWORD is not set
+  exit 1
+fi
+
+if [[ "$PGUSER" = "" ]]; then
+  >&2 echo PGUSER is not set
+  exit 1
+fi
+
+if [[ "$PGPASSWORD" = "" ]]; then
+  >&2 echo PGPASSWORD is not set
+  exit 1
+fi
+
+if [[ "$POSTGRES_USER" = "" ]]; then
+  >&2 echo POSTGRES_USER is not set
+  exit 1
+fi
+
+if [[ "$POSTGRES_PASSWORD" = "" ]]; then
+  >&2 echo POSTGRES_PASSWORD is not set
+  exit 1
+fi
+
+exit 0

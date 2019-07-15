@@ -1,0 +1,20 @@
+#!/bin/bash
+
+aws/acm-certificate-arns         | \
+while read arn; do
+  COUNT=$(
+    aws                            \
+      acm                          \
+        describe-certificate       \
+          --certificate-arn $arn | \
+    jq                             \
+      --raw-output                 \
+      '.Certificate | .InUseBy | length'
+  )
+
+  if [[ "$COUNT" = "0" ]]; then
+    echo $arn
+  fi
+done || exit 1
+
+exit 0

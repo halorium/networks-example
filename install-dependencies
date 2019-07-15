@@ -1,0 +1,33 @@
+#!/bin/bash
+
+git config --global http.https://gopkg.in.followRedirects true || exit 1
+
+if ! semaphores/put-install-dependencies; then
+  >&2 echo $'\e[33m'skipping dependency installation...$'\e[0m'
+  exit 0
+fi
+
+>&2 echo $'\e[32m'installing dependencies...$'\e[0m'
+
+go get -u github.com/halorium/sftp                   \
+          github.com/alecthomas/gometalinter         \
+          github.com/alexkohler/prealloc             \
+          github.com/aws/aws-sdk-go                  \
+          github.com/danilobuerger/autocert-s3-cache \
+          github.com/dgrijalva/jwt-go                \
+          github.com/gocarina/gocsv                  \
+          github.com/halorium/httprouter             \
+          github.com/halorium/json-iterator          \
+          github.com/headzoo/surf                    \
+          github.com/headzoo/surf/browser            \
+          github.com/lib/pq                          \
+          github.com/mgutz/ansi/cmd/ansi-mgutz       \
+          github.com/sha1sum/aws_signing_client      \
+          github.com/shopspring/decimal              \
+          golang.org/x/crypto/acme/autocert          || exit 1
+
+OUTPUT=$(
+  gometalinter --install 2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

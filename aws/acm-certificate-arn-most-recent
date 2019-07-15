@@ -1,0 +1,15 @@
+#!/bin/bash
+
+aws/acm-certificate-arns                                                  | \
+while read arn; do
+  aws                                                                       \
+    acm                                                                     \
+      describe-certificate                                                  \
+        --certificate-arn $arn                                            || exit 1
+done                                                                      | \
+jq                                                                          \
+  --raw-output                                                              \
+  -s                                                                        \
+  '. | sort_by(.ImportedAt) | .[-1] | .Certificate | .CertificateArn'     || exit 1
+
+exit 0

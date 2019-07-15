@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ "$IN_GIT_BRANCH" != "master" ]] && \
+  [[ $(git/head-comment) != *\[deploy\] ]]; then
+  >&2 echo not on master and HEAD comment does not end \[deploy\], not deploying
+  exit 2
+fi
+
+>&2 echo deploying to aws...
+
+aws/transition-stack             || exit 1
+aws/wait-for-stack-to-transition || exit 1
+aws/put-load-balancer-dns        || exit 1
+aws/run-migrator                 || exit 1
+aws/prune-certificates-from-acm  # OK to fail
+aws/prune-repositories           # OK to fail
+
+exit 0

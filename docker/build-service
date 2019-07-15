@@ -1,0 +1,31 @@
+#!/bin/bash
+
+PACKAGE_PATH=$1
+
+>&2 echo building $PACKAGE_PATH...
+
+PACKAGE_NAME=$(docker/hyphenate-pathname $PACKAGE_PATH)                    || exit 1
+
+REPOSITORY_ROOT=$(pwd)
+
+OUTPUT=$(
+  cd $PACKAGE_PATH                                                         || exit 1
+  shopt -s nullglob
+  if [[ -n "$(echo *.go)" ]]; then
+    $REPOSITORY_ROOT/go/build $PACKAGE_NAME                                || exit 1
+    $REPOSITORY_ROOT/compatibility/get-root-tls-certificates               || exit 1
+
+    $REPOSITORY_ROOT/tls/optionally-copy-files-to-context $REPOSITORY_ROOT \
+                                                          $PACKAGE_PATH    || exit 1
+
+    docker build --tag networks-example/$PACKAGE_NAME .                  || exit 1
+
+    rm -f ca-certificates.crt                                              || exit 1
+    rm -rf tls                                                             || exit 1
+    rm $PACKAGE_NAME                                                       || exit 1
+  else
+    docker build --tag networks-example/$PACKAGE_NAME .                  || exit 1
+  fi
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

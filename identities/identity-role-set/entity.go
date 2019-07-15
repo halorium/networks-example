@@ -1,0 +1,88 @@
+package identityroleset
+
+import (
+	"fmt"
+	"net/url"
+
+	"github.com/halorium/networks-example/flaw"
+	"github.com/halorium/networks-example/serializers"
+	"github.com/halorium/networks-example/uuid"
+)
+
+func NewEntity() *Entity {
+	return &Entity{
+		Head: &Head{},
+		Body: &Body{
+			Roles: []string{"identity"},
+		},
+	}
+}
+
+type Entity struct {
+	Head *Head `json:"head"`
+	Body *Body `json:"body"`
+}
+
+type Head struct {
+	CreatedAt  string `json:"created-at"`
+	Etag       string `json:"etag"`
+	IdentityID string `json:"identity-id"`
+}
+
+type Body struct {
+	Roles []string `json:"roles"`
+}
+
+func (e *Entity) Scan(src interface{}) error {
+	source, ok := src.([]byte)
+
+	if !ok {
+		return flaw.New("wrong type").Wrap("cannot Scan")
+	}
+
+	err := serializers.JSONUnmarshalTag("json", source, e)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Prefix implements Entity interface
+func (e *Entity) Prefix() string {
+	return fmt.Sprintf("/identities/%s/role-set", url.PathEscape(e.Head.IdentityID))
+}
+
+// ID implements Entity interface
+func (e *Entity) ID() string {
+	return e.Head.IdentityID
+}
+
+// Etag implements Entity interface
+func (e *Entity) Etag() string {
+	return e.Head.Etag
+}
+
+// CreatedAt implements Entity interface
+func (e *Entity) CreatedAt() string {
+	return e.Head.CreatedAt
+}
+
+// DBJSON implements Entity interface
+func (e *Entity) DBJSON() []byte {
+	return serializers.JSONCompactSerializer(e)
+}
+
+// BodyJSON implements Entity interface
+func (e *Entity) BodyJSON() []byte {
+	return serializers.JSONCompactSerializer(e.Body)
+}
+
+// SetEtagHeader sets the header before being saved in the db
+// the if block is to handle going into and coming out of the DB
+func (e *Entity) SetEtagHeader() {
+	if e.Head.Etag == "" {
+		e.Head.Etag = uuid.NewHash(string(serializers.JSONCompactSerializer(e.Body)))
+	}
+}

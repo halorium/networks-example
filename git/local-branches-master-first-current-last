@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo master
+
+git branch                                  | \
+awk -F ' +' '! /\(no branch\)/ {print $2}'  | \
+egrep -v master                             | \
+egrep -v ^$(git/current-branch)\$           || exit 1
+
+git/current-branch                          || exit 1
+
+exit 0

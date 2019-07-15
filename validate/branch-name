@@ -1,0 +1,23 @@
+#!/bin/bash
+
+>&2 echo validating branch name...
+
+if [[ "$TRAVIS_BRANCH" = "" ]]; then
+  CURRENT_BRANCH=$(git/current-branch)
+else
+  CURRENT_BRANCH=$TRAVIS_BRANCH
+fi
+
+if [[ "${#CURRENT_BRANCH}" -gt "13" ]]; then
+  >&2 echo branch name is too long to deploy \(13 characters max\)
+  exit 1
+fi
+
+CURRENT_BRANCH_FORM=$(echo -n $CURRENT_BRANCH | egrep '^[a-z][-a-zA-Z0-9]+' | wc -l)
+
+if [[ "$CURRENT_BRANCH_FORM" -eq "0" ]]; then
+  >&2 echo branch name does not match regexp ^[a-z][-a-zA-Z0-9]+
+  exit 1
+fi
+
+exit 0

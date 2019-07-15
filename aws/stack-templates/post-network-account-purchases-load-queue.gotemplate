@@ -1,0 +1,23 @@
+{{{define "post-network-account-purchases-load-queue"}}}
+"PostNetworkAccountPurchasesLoadQueue": {
+  "Type": "AWS::SQS::Queue",
+  "Properties": {
+    "MaximumMessageSize": 262144,
+    "MessageRetentionPeriod": 1209600,
+    "QueueName": {
+      "Fn::Sub": "${AWS::StackName}-post-network-account-purchases-load"
+    },
+    "ReceiveMessageWaitTimeSeconds": 20,
+    "RedrivePolicy": {
+      "deadLetterTargetArn": {
+        "Fn::GetAtt": [
+          "PostNetworkAccountPurchasesLoadRedriveQueue",
+          "Arn"
+        ]
+      },
+      "maxReceiveCount": 8
+    },
+    "VisibilityTimeout": 30
+  }
+}
+{{{end}}}

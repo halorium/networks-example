@@ -1,0 +1,13 @@
+{{{define "post-network-account-purchases-load-topic"}}}
+"PostNetworkAccountPurchasesLoadTopic": {
+  "Type": "AWS::SNS::Topic",
+  "Properties": {
+    "DisplayName": {
+      "Fn::Sub": "${AWS::StackName}-post-network-account-purchases-load"
+    },
+    "TopicName": {
+      "Fn::Sub": "${AWS::StackName}-post-network-account-purchases-load"
+    }
+  }
+}
+{{{end}}}

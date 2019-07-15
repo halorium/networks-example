@@ -1,0 +1,14 @@
+#!/bin/bash
+
+>&2 echo validating stack template...
+
+aws/render-stack-template                      || exit 1
+aws/put-stack-template-in-s3                   || exit 1
+
+aws                                                                                                                 \
+  cloudformation                                                                                                    \
+    validate-template                                                                                               \
+      --template-url https://s3.amazonaws.com/halorium.networks-example/$IN_GIT_BRANCH/$IN_GIT_SHA.template \
+> $IN_ARTIFACTS_PATH/$IN_GIT_BRANCH.validation || exit 1
+
+exit 0

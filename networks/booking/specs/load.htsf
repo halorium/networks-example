@@ -1,0 +1,85 @@
+> PUT http://networks-api/networks/26 HTTP/1.1
+>
+> {
+>   "name": "Booking.com",
+>   "variant": "booking",
+>   "variations": {
+>     "api-host": "http://networks-booking-mock-api",
+>     "days-per-request": "1",
+>     "days-to-load": "45",
+>     "rate-interval": "10s",
+>     "rate-quantity": "1"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 117427a5a5389412127e92c76dcb41f1158283a00efc8547ac476ea679bca538
+< In-Network-Id: 26
+< In-Variation-Version: 9201a62eeeb2a81c765d3524c843bd64a3b78e9791f9c905714488420b609456
+<
+< {
+<   "name": "Booking.com",
+<   "variant": "booking",
+<   "variations": {
+<     "api-host": "http://networks-booking-mock-api",
+<     "days-per-request": "1",
+<     "days-to-load": "45",
+<     "rate-interval": "10s",
+<     "rate-quantity": "1"
+<   }
+< }
+
+> PUT http://networks-api/networks/26/accounts/60 HTTP/1.1
+>
+> {
+>   "name": "Booking.com",
+>   "variant": "booking",
+>   "variations": {
+>     "additional-id": "334402",
+>     "currency" : "EUR",
+>     "password" : "password",
+>     "username" : "username"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: f2829566924e872af16dca3fa8758f3074254ca540dab6fc6b20d8dd5ba39717
+< In-Network-Account-Id: 60
+< In-Network-Id: 26
+< In-Variation-Version: 071a3d30c704889babfdb3dbaf49a2c433aa9e45663120ba15966fb342d705ec
+<
+< {
+<   "name": "Booking.com",
+<   "variant": "booking",
+<   "variations": {
+<     "additional-id": "334402",
+<     "currency": "EUR",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> POST http://networks-api/networks/26/accounts/60/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-01T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 202 Accepted
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "start-time": "2017-01-01T00:00:00.000000Z",
+<   "stop-time": "2017-01-01T23:59:59.999999Z"
+< }

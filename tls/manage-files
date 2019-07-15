@@ -1,0 +1,21 @@
+#!/bin/bash
+
+>&2 echo managing tls files...
+
+source travis-ci/export-env-vars
+
+# if status 0 then certs are fresh, and already in s3 and acm
+tls/get-files-from-s3          && exit 0 # exit successfully
+
+# if status 1 then exit 1
+if [[ "$?" -eq "1" ]]; then
+  exit 1
+fi
+
+# status 2 indicates certificates not present in s3, or have expired
+tls/get-files-from-letsencrypt || exit 1
+tls/move-and-rename-files      || exit 1
+tls/put-files-in-s3            || exit 1
+tls/put-files-in-acm           || exit 1
+
+exit 0

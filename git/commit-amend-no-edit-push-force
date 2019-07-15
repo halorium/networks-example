@@ -1,0 +1,7 @@
+#!/bin/bash
+
+git/commit-amend-no-edit || exit 1
+
+git push -f              || exit 1
+
+exit 0

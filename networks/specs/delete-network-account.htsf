@@ -1,0 +1,49 @@
+> PUT http://networks-api/networks/123/accounts/789 HTTP/1.1
+>
+> {
+>   "name": "Dummy",
+>   "variant": "dummy",
+>   "variations": {
+>     "currency": "USD",
+>     "password": "password",
+>     "username": "username"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: d7a8e513c3be5de21b0e5456af017de18f98aaeea5e846fe0458e38ac1120259
+< In-Network-Account-Id: 789
+< In-Network-Id: 123
+< In-Variation-Version: d138a777ecda5e7cef6c2aa3618fa51660a59118c16034843850d3e9765c2413
+<
+< {
+<   "name": "Dummy",
+<   "variant": "dummy",
+<   "variations": {
+<     "currency": "USD",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> DELETE http://networks-api/networks/123/accounts/789 HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> GET http://networks-api/networks/123/accounts/789 HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

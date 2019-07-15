@@ -1,0 +1,47 @@
+{{{define "roles-api-task"}}}
+"RolesApiTask": {
+  "DependsOn": [
+    "TaskPolicy"
+  ],
+  "Type": "AWS::ECS::TaskDefinition",
+  "Properties": {
+    "ContainerDefinitions": [
+      {
+        "DockerSecurityOptions": [
+          "no-new-privileges"
+        ],
+        "Environment": [
+          {{{- template "environment" -}}}
+        ],
+        "Essential": true,
+        "Image": {
+          "Fn::Sub": "${InDockerRegistry}/${AWS::StackName}-roles-api:${InGitSha}"
+        },
+        "LogConfiguration": {
+          {{{- template "task-log-configuration" -}}}
+        },
+        "MemoryReservation": 64,
+        "Name": "roles-api",
+        "PortMappings": [
+          {
+            "ContainerPort": 443
+          },
+          {
+            "ContainerPort": 444
+          }
+        ],
+        "ReadonlyRootFilesystem": true
+      }
+    ],
+    "Family": {
+      "Fn::Sub": "${AWS::StackName}-roles-api"
+    },
+    "TaskRoleArn": {
+      "Fn::GetAtt": [
+        "TaskRole",
+        "Arn"
+      ]
+    }
+  }
+}
+{{{end}}}

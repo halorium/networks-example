@@ -1,0 +1,5 @@
+version: '2'
+services:
+  networks-api:
+    image: networks-example/networks-api
+    read_only: true

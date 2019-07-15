@@ -1,0 +1,130 @@
+{{{define "launch-configuration"}}}
+"LaunchConfiguration": {
+  "Type": "AWS::AutoScaling::LaunchConfiguration",
+  "Properties": {
+    "AssociatePublicIpAddress": "true",
+    "EbsOptimized": "false",
+    "IamInstanceProfile": {
+      "Ref": "InstanceProfile"
+    },
+    "ImageId": "ami-13401669",
+    "InstanceMonitoring": "true",
+    "InstanceType": "t2.small",
+    "KeyName": "networks-example",
+    "SecurityGroups": [
+      {
+        "Ref": "PrivateSecurityGroup"
+      }
+    ],
+    "UserData": {
+      "Fn::Base64": {
+        "Fn::Join": [
+          "",
+          [
+            "#!/bin/bash -x\n",
+            "exec &> /tmp/user-data.log\n",
+            "yum install -y rsyslog-gnutls\n",
+            "mkdir -p /var/spool/rsyslog\n",
+            "mkdir -p /etc/rsyslog.d/keys/ca.d\n",
+            "(\n",
+            "  cd /etc/rsyslog.d/keys/ca.d\n",
+            "  curl -O https://logdog.loggly.com/media/logs-01.loggly.com_sha12.crt\n",
+            "  chmod 500 *.crt\n",
+            ")\n",
+            "cat > /etc/rsyslog.d/22-loggly.conf <<'RSYSLOG_CONFIG'\n",
+            "$template LogglyForwardFormat,\"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %hostname% %app-name% %procid% %msgid% [",
+            {
+              "Ref": "InLogglyToken"
+            },
+            "@41058]%msg:::sp-if-no-1st-sp%%msg:::drop-last-lf%\\n\"\n",
+            "$ActionQueueFileName forward-to-loggly\n",
+            "$ActionQueueMaxDiskSpace 1g\n",
+            "$ActionQueueSaveOnShutdown on\n",
+            "$ActionQueueType LinkedList\n",
+            "$ActionResumeRetryCount -1\n",
+            "$ActionSendStreamDriver gtls\n",
+            "$ActionSendStreamDriverAuthMode x509/name\n",
+            "$ActionSendStreamDriverMode 1\n",
+            "$ActionSendStreamDriverPermittedPeer *.loggly.com\n",
+            "$DefaultNetstreamDriverCAFile /etc/rsyslog.d/keys/ca.d/logs-01.loggly.com_sha12.crt\n",
+            "$MaxMessageSize 256k\n",
+            "$SystemLogRateLimitBurst 0\n",
+            "$SystemLogRateLimitInterval 0\n",
+            "$WorkDirectory /var/spool/rsyslog\n",
+            "*.* @@logs-01.loggly.com:6514;LogglyForwardFormat\n",
+            "RSYSLOG_CONFIG\n",
+            "service rsyslog restart\n",
+            "cat >> /etc/sysconfig/docker <<'DOCKER_CONFIG'\n",
+            "OPTIONS=\"$OPTIONS --selinux-enabled=true --icc=false --iptables=true --log-driver=syslog --log-opt syslog-facility=local1 --log-opt tag={{.Name}} --log-opt tag={{.ID}}\"\n",
+            "DOCKER_CONFIG\n",
+            "service docker restart\n",
+            "cat > /etc/ecs/ecs.config <<'ECS_CONFIG'\n",
+            "ECS_CLUSTER=",
+            {
+              "Ref": "Cluster"
+            },
+            "\n",
+            "ECS_SELINUX_CAPABLE=true\n",
+            "ECS_CONFIG\n",
+            "start ecs\n",
+            "iptables --insert FORWARD 1 --in-interface docker+ --destination 169.254.169.254/32 --jump DROP\n",
+            "ip link set dev eth0 mtu 9001\n",
+            "cat >> /etc/dhcp/dhclient-eth0.conf <<'DHCP_CLIENT_ETH0_CONF'\n",
+            "interface \"eth0\" {\n",
+            "  supersede interface-mtu 9001;\n",
+            "}\n",
+            "DHCP_CLIENT_ETH0_CONF\n",
+            "cat > /etc/logrotate.conf <<'LOGROTATE_CONF'\n",
+            "# see \"man logrotate\" for details\n",
+            "# rotate log files daily\n",
+            "daily\n",
+            "\n",
+            "# keep 7 days worth of backlogs\n",
+            "rotate 7\n",
+            "\n",
+            "# create new (empty) log files after rotating old ones\n",
+            "create\n",
+            "\n",
+            "# use date as a suffix of the rotated file\n",
+            "dateext\n",
+            "\n",
+            "# compress log files\n",
+            "compress\n",
+            "\n",
+            "# RPM packages drop log rotation information into this directory\n",
+            "include /etc/logrotate.d\n",
+            "\n",
+            "# no packages own wtmp and btmp -- we'll rotate them here\n",
+            "/var/log/wtmp {\n",
+            "    monthly\n",
+            "    create 0664 root utmp\n",
+            "    minsize 1M\n",
+            "    rotate 1\n",
+            "}\n",
+            "\n",
+            "/var/log/btmp {\n",
+            "    monthly\n",
+            "    create 0600 root utmp\n",
+            "    missingok\n",
+            "    rotate 1\n",
+            "}\n",
+            "\n",
+            "# system-specific logs may be also be configured here.\n",
+            "LOGROTATE_CONF\n",
+            "LINUX_VERSION=$(cat /etc/system-release)\n",
+            "LINUX_VERSION=\"${LINUX_VERSION: -7}\"\n",
+            "sudo yum -y --releasever=$LINUX_VERSION install kernel-devel-$(uname -r)\n",
+            "curl -s https://s3.amazonaws.com/download.draios.com/stable/install-agent | sudo bash -s -- --access_key ",
+            {
+              "Ref": "InSysdigToken"
+            },
+            " --secure true\n",
+            "sudo /usr/lib/dkms/dkms_autoinstaller start\n",
+            "sudo service dragent restart\n"
+          ]
+        ]
+      }
+    }
+  }
+}
+{{{end}}}

@@ -1,0 +1,97 @@
+{{{define "auto-scaling-group"}}}
+"AutoScalingGroup": {
+  "DependsOn": [
+    "Cluster",
+    "RouteToInternet",
+    "StatusApiTask",
+    "VPCGatewayAttachment"
+  ],
+  "Type": "AWS::AutoScaling::AutoScalingGroup",
+  "UpdatePolicy": {
+    "AutoScalingRollingUpdate": {
+      "MaxBatchSize": "1",
+      "PauseTime": "PT1M0S"
+    }
+  },
+  "Properties": {
+    "AvailabilityZones": [
+      {
+        "Fn::Select": [
+          "0",
+          {
+            "Fn::GetAZs": {
+              "Ref": "AWS::Region"
+            }
+          }
+        ]
+      },
+      {
+        "Fn::Select": [
+          "1",
+          {
+            "Fn::GetAZs": {
+              "Ref": "AWS::Region"
+            }
+          }
+        ]
+      },
+      {
+        "Fn::Select": [
+          "2",
+          {
+            "Fn::GetAZs": {
+              "Ref": "AWS::Region"
+            }
+          }
+        ]
+      },
+      {
+        "Fn::Select": [
+          "3",
+          {
+            "Fn::GetAZs": {
+              "Ref": "AWS::Region"
+            }
+          }
+        ]
+      }
+    ],
+    "Cooldown": "3600",
+    "HealthCheckGracePeriod": "300",
+    "HealthCheckType": "ELB",
+    "LaunchConfigurationName": {
+      "Ref": "LaunchConfiguration"
+    },
+    "MaxSize": "16",
+    "MetricsCollection": [
+      {
+        "Granularity": "1Minute"
+      }
+    ],
+    "MinSize": 4,
+    "Tags": [
+      {
+        "Key": "Name",
+        "Value": {
+          "Ref": "AWS::StackName"
+        },
+        "PropagateAtLaunch": "true"
+      }
+    ],
+    "VPCZoneIdentifier": [
+      {
+        "Ref": "Subnet0"
+      },
+      {
+        "Ref": "Subnet1"
+      },
+      {
+        "Ref": "Subnet2"
+      },
+      {
+        "Ref": "Subnet3"
+      }
+    ]
+  }
+}
+{{{end}}}

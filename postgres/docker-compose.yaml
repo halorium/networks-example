@@ -1,0 +1,9 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.6.3-alpine
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

@@ -1,0 +1,10 @@
+{{{define "cluster"}}}
+"Cluster": {
+  "Type": "AWS::ECS::Cluster",
+  "Properties": {
+    "ClusterName": {
+      "Ref": "AWS::StackName"
+    }
+  }
+}
+{{{end}}}

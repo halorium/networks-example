@@ -1,0 +1,12 @@
+#!/bin/bash
+
+>&2 echo pruning database containers...
+
+(
+  docker ps -a                                  | \
+  egrep 'postgres'                              | \
+  awk '{print $1}'                              | \
+  compatibility/xargs docker rm -f &> /dev/null || exit 1
+) || exit 1
+
+exit 0

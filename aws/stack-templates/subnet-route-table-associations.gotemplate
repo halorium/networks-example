@@ -1,0 +1,46 @@
+{{{define "subnet-route-table-associations"}}}
+"SubnetRouteTableAssociation0": {
+  "Type": "AWS::EC2::SubnetRouteTableAssociation",
+  "Properties": {
+    "SubnetId": {
+      "Ref": "Subnet0"
+    },
+    "RouteTableId": {
+      "Ref": "RouteTable"
+    }
+  }
+},
+"SubnetRouteTableAssociation1": {
+  "Type": "AWS::EC2::SubnetRouteTableAssociation",
+  "Properties": {
+    "SubnetId": {
+      "Ref": "Subnet1"
+    },
+    "RouteTableId": {
+      "Ref": "RouteTable"
+    }
+  }
+},
+"SubnetRouteTableAssociation2": {
+  "Type": "AWS::EC2::SubnetRouteTableAssociation",
+  "Properties": {
+    "SubnetId": {
+      "Ref": "Subnet2"
+    },
+    "RouteTableId": {
+      "Ref": "RouteTable"
+    }
+  }
+},
+"SubnetRouteTableAssociation3": {
+  "Type": "AWS::EC2::SubnetRouteTableAssociation",
+  "Properties": {
+    "SubnetId": {
+      "Ref": "Subnet3"
+    },
+    "RouteTableId": {
+      "Ref": "RouteTable"
+    }
+  }
+}
+{{{end}}}

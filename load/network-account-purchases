@@ -1,0 +1,15 @@
+#!/bin/bash
+
+START_TIME=$1
+STOP_TIME=$2
+ENDPOINT=$3
+
+curl $ENDPOINT                           \
+     -X POST                             \
+     -H "Content-Type: application/json" \
+     -i                                  \
+     -d                                  \
+"{
+  \"start-time\": \"$START_TIME\",
+  \"stop-time\": \"$STOP_TIME\"
+}"

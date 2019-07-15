@@ -1,0 +1,40 @@
+{{{define "identities-api-service"}}}
+"IdentitiesApiService": {
+  "DependsOn": [
+    "IdentitiesApiListenerRule",
+    "IdentitiesApiTargetGroup"
+  ],
+  "Type": "AWS::ECS::Service",
+  "Properties": {
+    "Cluster": {
+      "Ref": "Cluster"
+    },
+    "DeploymentConfiguration": {
+      "MaximumPercent": "200",
+      "MinimumHealthyPercent": "50"
+    },
+    "DesiredCount": 4,
+    "LoadBalancers": [
+      {
+        "ContainerName": "identities-api",
+        "ContainerPort": "443",
+        "TargetGroupArn": {
+          "Ref": "IdentitiesApiTargetGroup"
+        }
+      }
+    ],
+    "PlacementStrategies": [
+      {
+        "Type": "spread",
+        "Field": "attribute:ecs.availability-zone"
+      }
+    ],
+    "Role": {
+      "Ref": "ServiceRole"
+    },
+    "TaskDefinition": {
+      "Ref": "IdentitiesApiTask"
+    }
+  }
+}
+{{{end}}}

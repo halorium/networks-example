@@ -1,0 +1,6 @@
+#!/bin/bash
+
+http-spec identities/specs/post-identity.htsf         || exit 1
+http-spec identities/specs/put-identity-role-set.htsf || exit 1
+
+exit 0

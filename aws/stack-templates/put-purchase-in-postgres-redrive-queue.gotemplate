@@ -1,0 +1,14 @@
+{{{define "put-purchase-in-postgres-redrive-queue"}}}
+"PutPurchaseInPostgresRedriveQueue": {
+  "Type": "AWS::SQS::Queue",
+  "Properties": {
+    "MaximumMessageSize": 262144,
+    "MessageRetentionPeriod": 1209600,
+    "QueueName": {
+      "Fn::Sub": "${AWS::StackName}-put-purchase-in-postgres-redrive"
+    },
+    "ReceiveMessageWaitTimeSeconds": 20,
+    "VisibilityTimeout": 30
+  }
+}
+{{{end}}}

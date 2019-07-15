@@ -1,0 +1,38 @@
+#!/bin/bash
+
+if [[ "$1" = "" ]] || [[ "$2" = "" ]] || [[ "$3" = "" ]]; then
+  >&2 echo usage: $0 2018-01-01 31 https://branch.v1.networksexample.com
+  exit 1
+fi
+
+DATE=$1
+DAYS=$2
+HOST=$3
+
+load/put-network-and-account-affiliate-window $HOST    || exit 1
+load/put-network-and-account-affilinet $HOST           || exit 1
+load/put-network-and-account-booking $HOST             || exit 1
+load/put-network-and-account-rakuten $HOST             || exit 1
+
+for count in $(seq 1 $DAYS); do
+  START_TIME=${DATE}T00:00:00.000000Z
+  STOP_TIME=${DATE}T23:59:59.999999Z
+
+  # affiliate-window - UK GBP
+  >&2 echo affiliate-window-uk
+  load/network-account-purchases $START_TIME $STOP_TIME $HOST/networks/6/accounts/13/purchases/load   || exit 1
+
+  # affilinet
+  >&2 echo affilinet
+  load/network-account-purchases $START_TIME $STOP_TIME $HOST/networks/3/accounts/20/purchases/load   || exit 1
+
+  # booking
+  >&2 echo booking
+  load/network-account-purchases $START_TIME $STOP_TIME $HOST/networks/26/accounts/60/purchases/load  || exit 1
+
+  # rakuten UK
+  >&2 echo rakuten-uk
+  load/network-account-purchases $START_TIME $STOP_TIME $HOST/networks/15/accounts/19/purchases/load  || exit 1
+
+  DATE=$(compatibility/tomorrow $DATE)
+done

@@ -1,0 +1,5 @@
+version: '2'
+services:
+  cycler-service:
+    image: networks-example/cycler-service
+    read_only: true

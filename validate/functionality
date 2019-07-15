@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export IN_GIT_SHA=`git/current-sha`
+
+>&2 echo validating functionality...
+
+OUTPUT=$(
+  docker-compose run http-spec-service
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

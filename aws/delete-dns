@@ -1,0 +1,42 @@
+#!/bin/bash
+
+DOMAIN=$1
+TYPE=$2
+VALUE=$3
+TTL=$4
+
+CHANGE_BATCH=$(
+  cat <<EOF
+    {
+      "Comment": "$DOMAIN",
+      "Changes": [
+        {
+          "Action": "DELETE",
+          "ResourceRecordSet": {
+            "Name": "$DOMAIN.",
+            "Type": "$TYPE",
+            "TTL": $TTL,
+            "ResourceRecords": [
+              {
+                "Value": "$VALUE"
+              }
+            ]
+          }
+        }
+      ]
+    }
+EOF
+)
+
+CHANGE_ID=$(
+  aws --profile dns                                     \
+    route53                                             \
+      change-resource-record-sets                       \
+      --hosted-zone-id $(aws/route-53-hosted-zone-id)   \
+      --change-batch "$CHANGE_BATCH"                  | \
+  jq --raw-output '.ChangeInfo.Id'
+) || exit 1
+
+aws/wait-for-dns-to-transition $CHANGE_ID || exit 1
+
+exit 0

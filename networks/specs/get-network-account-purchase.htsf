@@ -1,0 +1,71 @@
+> GET http://networks-api/networks/123/accounts/456/purchases/789 HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: f42375481a126dec0400833d44299efcd2a5138846b7ff3712e6a44aa6bdbd3c
+< In-Network-Account-Id: 456
+< In-Network-Id: 123
+< In-Purchase-Id: 789
+< In-Variation-Version: 371d8e6c1ff4e31a885cfafec269100c7924580e5fa3f706a53a6de67d6b96a6
+<
+< {
+<   "click-id": "t592290327m",
+<   "commission-amount": "0",
+<   "currency": "GBP",
+<   "date": "2016-10-11T06:29:00.000000Z",
+<   "order-id": "34221822",
+<   "sale-amount": "0",
+<   "status": "DECLINED",
+<   "variant": "rakuten",
+<   "variations": {
+<     "adjusted-commission": "0",
+<     "baseline-commission": "0",
+<     "match-date": "2016-Oct-11",
+<     "match-time": "0701",
+<     "member-id": "t592290327m",
+<     "merchant-partner-id": "38432",
+<     "merchant-partner-name": "River Island",
+<     "order-id": "34221822",
+<     "process-due-date": "2016-Oct-11",
+<     "process-due-time": "0629",
+<     "product-name": "Bronze metallic deep plunge bodysuit",
+<     "product-sku-number": "5178643",
+<     "quantity": "1",
+<     "sales-amount": "0",
+<     "total-commission": "0",
+<     "transaction-date": "2016-Oct-11",
+<     "transaction-id": "789",
+<     "transaction-time": "0629"
+<   }
+< }
+
+> GET http://networks-api/networks/invalid/accounts/456/purchases/789 HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> GET http://networks-api/networks/123/accounts/invalid/purchases/789 HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> GET http://networks-api/networks/123/accounts/456/purchases/invalid HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

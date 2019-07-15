@@ -1,0 +1,10 @@
+#!/bin/bash
+
+>&2 echo setting DNS for $IN_ELB_CNAME...
+
+aws/put-dns $IN_ELB_CNAME                 \
+            CNAME                         \
+            $(aws/load-balancer-hostname) \
+            300                           || exit 1
+
+exit 0

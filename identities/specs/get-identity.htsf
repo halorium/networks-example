@@ -1,0 +1,54 @@
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.7@email.com",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 201 Created
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 7da761cdb6efb4c35023ba4af4f2e57c84adcaed52d5d64b1c87c28bd9578021
+< In-Identity-Id: ⧆identity-id⧆:b62:22⧆
+< In-Variation-Version: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+<
+< {
+<   "name": "John Doe",
+<   "email": "john.doe.7@email.com",
+<   "variant": "password",
+<   "variations": {}
+< }
+
+> GET http://identities-api/identities/⧈identity-id⧈ HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 7da761cdb6efb4c35023ba4af4f2e57c84adcaed52d5d64b1c87c28bd9578021
+< In-Identity-Id: ⧈identity-id⧈
+< In-Variation-Version: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+<
+< {
+<   "name": "John Doe",
+<   "email": "john.doe.7@email.com",
+<   "variant": "password",
+<   "variations": {}
+< }
+
+> GET http://identities-api/identities/invalid HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

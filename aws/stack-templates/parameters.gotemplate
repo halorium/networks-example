@@ -1,0 +1,66 @@
+{{{define "parameters"}}}
+"InGitBranch": {
+  "Description": "git branch name",
+  "Type": "String"
+},
+"InDockerRegistry": {
+  "Description": "docker repo host",
+  "Type": "String"
+},
+"InGitSha": {
+  "Description": "git sha",
+  "Type": "String"
+},
+"InJwtSigningKey": {
+  "Description": "JWT signing key",
+  "Type": "String"
+},
+"InLogglyToken": {
+  "Description": "Loggly identity token",
+  "Type": "String"
+},
+"InSysdigToken": {
+  "Description": "Sysdig identity token",
+  "Type": "String"
+},
+"PgUser": {
+  "Description": "PGUSER",
+  "Type": "String"
+},
+"PgPassword": {
+  "Description": "PGPASSWORD",
+  "Type": "String"
+},
+"PostgresUser": {
+  "Description": "POSTGRES_USER",
+  "Type": "String"
+},
+"PostgresPassword": {
+  "Description": "POSTGRES_PASSWORD",
+  "Type": "String"
+},
+"InPgUser": {
+  "Description": "IN_PGUSER",
+  "Type": "String"
+},
+"InPgPassword": {
+  "Description": "IN_PGPASSWORD",
+  "Type": "String"
+},
+"InSftpKey": {
+  "Description": "sftp key",
+  "Type": "String"
+},
+"InSubnetCidrBlocks": {
+  "Description": "subnet cidr blocks",
+  "Type": "CommaDelimitedList"
+},
+"InTlsCertificateArn": {
+  "Description": "tls certificate arn",
+  "Type": "String"
+},
+"InVpcCidrBase": {
+  "Description": "vpc cidr base",
+  "Type": "String"
+}
+{{{end}}}

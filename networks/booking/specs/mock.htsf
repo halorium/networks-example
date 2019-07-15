@@ -1,0 +1,46 @@
+> GET http://networks-booking-mock-api/partner/login.html?lang=en HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: text/html; charset=UTF-8
+< Date: ⧆⧆:date⧆
+<
+< <!doctype html>
+<   <body>
+<     <div class="login-block">
+<       <form method="post" name="myform" id="login-form">
+<         <input type="hidden" id="ses" name="ses" value="b6fc5398160cb95db0c962635ffb37a9"/>
+<         <fieldset>
+<           <div>
+<             <input type="text" name="loginname" id="username">
+<           </div>
+<         </fieldset>
+<         <fieldset>
+<           <div>
+<             <input type="password" autocomplete="off" name="password" id="password">
+<           </div>
+<         </fieldset>
+<         <fieldset>
+<           <input type="hidden" name="login" value="1">
+<           <input type="submit" data-action="validate_form" id="login-button" value="Sign in" class="btn btn-primary btn-reduced left login-block__login-button">
+<         </fieldset>
+<       </form>
+<     </div>
+<   </body>
+< </html>
+
+> GET http://networks-booking-mock-api/affiliate/reservations_details.html?start_date=2017-01-01&affiliate_id=334402&ses=abc123&wide=1&date_field=created&interval=day&count=0&format=csv HTTP/1.1
+> Cookie: esadm=02UmFuZG9tSVYkc2RlIyh9YbxZGyl9Y5%2BPJgT6x9weAFJemkk5Zz4YFaXu3ObguygYc7UrnUqk8qI%3D; domain=booking.com; path=/; expires=Sat, 24-Sep-2022 19:56:17 GMT; secure; HttpOnly
+>
+
+< HTTP/1.1 200 OK
+< Content-Disposition: attachment; filename=data.csv
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: text/csv
+< Date: ⧆⧆:date⧆
+<
+< "book nr.",booked,arrival,departure,"comission ( EUR )",perc,"fee ( EUR )","slip nr.","affiliate id","hotel name","accomodation type","hotel country","hotel city","hotel ufi","booker country","booker language",label
+< 1060471607,"2017-01-01 16:59:51",2017-01-02,2017-01-03,17.82,35,6.24,hsnl007162,334402,"Hotel Touring",Hotel,Italy,Pisa,-124918,France,French,t593568399m
+< 1463241658,"2017-01-02 11:35:41",2017-01-04,2017-01-05,7.15,35,2.50,hsnl007162,334402,"Kyriad Dax St-Paul-Les-Dax",Hotel,France,Saint-Paul-lès-Dax,-1467816,France,French,t593574825m
+< 1334716491,"2017-01-04 14:28:54",2017-03-06,2017-03-08,0.00,35,0.00,-,334402,"Hôtel Saint James",Hotel,France,Biarritz,-1412526,France,French,t593598821m

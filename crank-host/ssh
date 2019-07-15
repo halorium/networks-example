@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# to be used on AWS m4.large instance running Amazon Linux
+
+if [[ "$@" = "" ]]; then
+  ssh ec2-user@$CRANK_HOST
+else
+	ssh ec2-user@$CRANK_HOST "cd go/src/github.com/halorium/networks-example && $@"
+fi

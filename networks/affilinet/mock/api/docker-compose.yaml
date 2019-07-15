@@ -1,0 +1,5 @@
+version: '2'
+services:
+  networks-affilinet-mock-api:
+    image: networks-example/networks-affilinet-mock-api
+    read_only: true

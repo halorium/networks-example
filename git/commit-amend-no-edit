@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git commit -a --amend --no-edit || exit 1
+
+exit 0

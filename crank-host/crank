@@ -1,0 +1,7 @@
+#!/bin/bash
+
+>&2 echo cranking on crank host...
+
+ssh ec2-user@$CRANK_HOST "cd go/src/github.com/halorium/networks-example && ./crank" || exit 1
+
+exit 0

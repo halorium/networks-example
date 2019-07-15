@@ -1,0 +1,5 @@
+version: '2'
+services:
+  panic-api:
+    image: networks-example/panic-api
+    read_only: true

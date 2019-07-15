@@ -1,0 +1,22 @@
+{{{define "put-purchase-in-postgres-subscription"}}}
+"PutPurchaseInPostgresSubcription": {
+  "DependsOn": [
+    "PutNetworkAccountPurchaseTopic",
+    "PutPurchaseInPostgresQueue",
+    "PutPurchaseInPostgresQueuePolicy"
+  ],
+  "Type": "AWS::SNS::Subscription",
+  "Properties": {
+    "Endpoint": {
+      "Fn::GetAtt": [
+        "PutPurchaseInPostgresQueue",
+        "Arn"
+      ]
+    },
+    "Protocol": "sqs",
+    "TopicArn": {
+      "Ref": "PutNetworkAccountPurchaseTopic"
+    }
+  }
+}
+{{{end}}}

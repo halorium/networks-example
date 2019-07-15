@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This returns the date as yyyy-mm-dd or empty string
+
+aws                                                      \
+  s3                                                     \
+    ls                                                   \
+      --recursive                                        \
+      s3://halorium.networks-example/tls/files | \
+      tail -n 1                                        | \
+      awk '{print $1}'                                 || exit 1
+
+exit 0

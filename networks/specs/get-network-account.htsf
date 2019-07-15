@@ -1,0 +1,40 @@
+> GET http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 03e1b663b2043893813c16c3ffffb2a546a6de647a82f752ebb4528fc5b0bb2f
+< In-Network-Account-Id: 456
+< In-Network-Id: 123
+< In-Variation-Version: ebf104edc4dfe960d52b4727ad4dc37a50ed46eb96dbb8b590edfe80f29f8a1b
+<
+< {
+<   "name": "Rakuten - UK",
+<   "variant": "rakuten",
+<   "variations": {
+<     "currency": "GBP",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> GET http://networks-api/networks/invalid/accounts/456 HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> GET http://networks-api/networks/123/accounts/invalid HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

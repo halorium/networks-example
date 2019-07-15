@@ -1,0 +1,9 @@
+#!/bin/bash
+
+http-spec networks/specs/put-network.htsf                         || exit 1
+http-spec networks/specs/put-network-account.htsf                 || exit 1
+http-spec networks/specs/put-network-account-purchase.htsf        || exit 1
+
+http-spec networks/specs/post-network-account-purchases-load.htsf || exit 1
+
+exit 0

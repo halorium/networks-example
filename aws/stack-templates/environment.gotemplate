@@ -1,0 +1,196 @@
+{{{define "environment"}}}
+{
+  "Name": "AWS_REGION",
+  "Value": {
+    "Ref": "AWS::Region"
+  }
+},
+{
+  "Name": "AWS_DEFAULT_REGION",
+  "Value": {
+    "Ref": "AWS::Region"
+  }
+},
+{
+  "Name": "LANG",
+  "Value": "en_US.UTF-8"
+},
+{
+  "Name": "LC_ALL",
+  "Value": "en_US.UTF-8"
+},
+{
+  "Name": "IN_GIT_BRANCH",
+  "Value": {
+    "Ref": "InGitBranch"
+  }
+},
+{
+  "Name": "IN_NETWORKS_HOST",
+  "Value": {
+    "Fn::Join": [
+      "",
+      [
+        "https://",
+        {
+          "Ref": "InGitBranch"
+        },
+        ".v1.networksexample.com"
+      ]
+    ]
+  }
+},
+{
+  "Name": "IN_NETWORKS_URI",
+  "Value": {
+    "Fn::Join": [
+      "",
+      [
+        "https://",
+        {
+          "Ref": "InGitBranch"
+        },
+        ".v1.networksexample.com/networks/"
+      ]
+    ]
+  }
+},
+{
+  "Name": "PGHOST",
+  "Value": {
+    "Fn::GetAtt": [
+      "Postgres",
+      "Endpoint.Address"
+    ]
+  }
+},
+{
+  "Name": "PGPORT",
+  "Value": {
+    "Fn::GetAtt": [
+      "Postgres",
+      "Endpoint.Port"
+    ]
+  }
+},
+{
+  "Name": "PGUSER",
+  "Value": {
+    "Ref": "PgUser"
+  }
+},
+{
+  "Name": "PGPASSWORD",
+  "Value": {
+    "Ref": "PgPassword"
+  }
+},
+{
+  "Name": "POSTGRES_USER",
+  "Value": {
+    "Ref": "PostgresUser"
+  }
+},
+{
+  "Name": "POSTGRES_PASSWORD",
+  "Value": {
+    "Ref": "PostgresPassword"
+  }
+},
+{
+  "Name": "IN_PGUSER",
+  "Value": {
+    "Ref": "InPgUser"
+  }
+},
+{
+  "Name": "IN_PGPASSWORD",
+  "Value": {
+    "Ref": "InPgPassword"
+  }
+},
+{
+  "Name": "PGDATABASE",
+  "Value": "postgres"
+},
+{
+  "Name": "PGSSLMODE",
+  "Value": "require"
+},
+{
+  "Name": "PGTZ",
+  "Value": "UTC"
+},
+{
+  "Name": "REDIS_URI",
+  "Value": "redis://redis:6379"
+},
+{
+  "Name": "TZ",
+  "Value": "UTC"
+},
+{
+  "Name": "IN_AFFILIATE_WINDOW_API_HOST",
+  "Value": "https://api.awin.com"
+},
+{
+  "Name": "IN_AFFILINET_API_HOST",
+  "Value": "https://api.affili.net"
+},
+{
+  "Name": "IN_BOOKING_API_HOST",
+  "Value": "https://admin.booking.com"
+},
+{
+  "Name": "IN_STACK_NAME",
+  "Value": {
+    "Ref": "AWS::StackName"
+  }
+},
+{
+  "Name": "IN_GIT_SHA",
+  "Value": {
+    "Ref": "InGitSha"
+  }
+},
+{
+  "Name": "IN_JWT_SIGNING_KEY",
+  "Value": {
+    "Ref": "InJwtSigningKey"
+  }
+},
+{
+  "Name": "IN_LOG_COLORIZATION",
+  "Value": "false"
+},
+{
+  "Name": "IN_LOG_DEBUG_MESSAGES",
+  "Value": "false"
+},
+{
+  "Name": "IN_LOG_SERIALIZATION",
+  "Value": "json-compact"
+},
+{
+  "Name": "IN_SFTP_HOST",
+  "Value": "sftp.networksexample.com"
+},
+{
+  "Name": "IN_SFTP_USER",
+  "Value": "lvuser"
+},
+{
+  "Name": "IN_SFTP_PORT",
+  "Value": "22"
+},
+{
+  "Name": "IN_SFTP_PATH_RAKUTEN",
+  "Value": "/home/linkshare/"
+},
+{
+  "Name": "IN_SFTP_KEY",
+  "Value": {
+    "Ref": "InSftpKey"
+  }
+}
+{{{end}}}

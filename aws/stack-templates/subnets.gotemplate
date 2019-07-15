@@ -1,0 +1,106 @@
+{{{define "subnets"}}}
+"Subnet0": {
+  "Type": "AWS::EC2::Subnet",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "AvailabilityZone": {
+      "Fn::Select": [
+        "0",
+        {
+          "Fn::GetAZs": {
+            "Ref": "AWS::Region"
+          }
+        }
+      ]
+    },
+    "CidrBlock": {
+      "Fn::Select": [
+        "0",
+        {
+          "Ref": "InSubnetCidrBlocks"
+        }
+      ]
+    }
+  }
+},
+"Subnet1": {
+  "Type": "AWS::EC2::Subnet",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "AvailabilityZone": {
+      "Fn::Select": [
+        "1",
+        {
+          "Fn::GetAZs": {
+            "Ref": "AWS::Region"
+          }
+        }
+      ]
+    },
+    "CidrBlock": {
+      "Fn::Select": [
+        "1",
+        {
+          "Ref": "InSubnetCidrBlocks"
+        }
+      ]
+    }
+  }
+},
+"Subnet2": {
+  "Type": "AWS::EC2::Subnet",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "AvailabilityZone": {
+      "Fn::Select": [
+        "2",
+        {
+          "Fn::GetAZs": {
+            "Ref": "AWS::Region"
+          }
+        }
+      ]
+    },
+    "CidrBlock": {
+      "Fn::Select": [
+        "2",
+        {
+          "Ref": "InSubnetCidrBlocks"
+        }
+      ]
+    }
+  }
+},
+"Subnet3": {
+  "Type": "AWS::EC2::Subnet",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "AvailabilityZone": {
+      "Fn::Select": [
+        "3",
+        {
+          "Fn::GetAZs": {
+            "Ref": "AWS::Region"
+          }
+        }
+      ]
+    },
+    "CidrBlock": {
+      "Fn::Select": [
+        "3",
+        {
+          "Ref": "InSubnetCidrBlocks"
+        }
+      ]
+    }
+  }
+}
+{{{end}}}

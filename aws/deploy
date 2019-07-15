@@ -1,0 +1,19 @@
+#!/bin/bash
+
+aws/validate-stack-template     || exit 1
+
+aws/optionally-delete-stack     && exit 0 # exit successfully
+
+# status 2 indicates stack not deleted
+if [[ "$?" -eq "1" ]]; then
+	exit 1
+fi
+
+aws/optionally-transition-stack && exit 0 # exit successfully
+
+# status 2 indicates stack not transitioned
+if [[ "$?" -eq "1" ]]; then
+	exit 1
+fi
+
+exit 0

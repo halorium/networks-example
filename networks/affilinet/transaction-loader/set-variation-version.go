@@ -1,0 +1,32 @@
+package affilinet
+
+import (
+	"github.com/halorium/networks-example/flaw"
+	"github.com/halorium/networks-example/networks/network-account-purchase"
+	"github.com/halorium/networks-example/serializers"
+	"github.com/halorium/networks-example/uuid"
+)
+
+func SetVariationVersion(networkAccountPurchase *networkaccountpurchase.Entity) *flaw.Error {
+	body := serializers.JSONMarshalTag("json", networkAccountPurchase.Body.Variations)
+
+	trans := &transaction{}
+
+	flawError := serializers.JSONUnmarshalTag("json", body, trans)
+
+	if flawError != nil {
+		return flawError.Wrap("cannot SetVariationVersion")
+	}
+
+	networkAccountPurchase.Head.VariationVersion = uuid.NewHash(
+		trans.TransactionID,       // purchase-id
+		trans.SubID,               // click-id
+		trans.PublisherCommission, // commission
+		trans.RegistrationDate,    // date
+		trans.BasketInfo.BasketID, // order-id
+		trans.NetPrice,            // sale
+		trans.TransactionStatus,   // status
+	)
+
+	return nil
+}

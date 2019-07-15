@@ -1,0 +1,14 @@
+#!/bin/bash
+
+>&2 echo putting tls files in acm...
+
+OUTPUT=$(
+  aws                                                              \
+    acm                                                            \
+      import-certificate                                           \
+        --certificate       file://tls/files/certificate.pem       \
+        --certificate-chain file://tls/files/chain.pem             \
+        --private-key       file://tls/files/private-key.pem 2>&1  || exit 1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

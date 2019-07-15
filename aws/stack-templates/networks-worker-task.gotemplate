@@ -1,0 +1,39 @@
+{{{define "networks-worker-task"}}}
+"NetworksWorkerTask": {
+  "DependsOn": [
+    "TaskPolicy"
+  ],
+  "Type": "AWS::ECS::TaskDefinition",
+  "Properties": {
+    "ContainerDefinitions": [
+      {
+        "DockerSecurityOptions": [
+          "no-new-privileges"
+        ],
+        "Environment": [
+          {{{- template "environment" -}}}
+        ],
+        "Essential": true,
+        "Image": {
+          "Fn::Sub": "${InDockerRegistry}/${AWS::StackName}-networks-worker:${InGitSha}"
+        },
+        "LogConfiguration": {
+          {{{- template "task-log-configuration" -}}}
+        },
+        "MemoryReservation": 128,
+        "Name": "networks-worker",
+        "ReadonlyRootFilesystem": true
+      }
+    ],
+    "Family": {
+      "Fn::Sub": "${AWS::StackName}-networks-worker"
+    },
+    "TaskRoleArn": {
+      "Fn::GetAtt": [
+        "TaskRole",
+        "Arn"
+      ]
+    }
+  }
+}
+{{{end}}}

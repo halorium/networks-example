@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm -rf ~/.aws                     || exit 1
+rm -rf tls/certbot-files          || exit 1
+rm -rf tls/files                  || exit 1
+rm -rf /tmp/fresh-certificate-arn || exit 1
+
+exit 0

@@ -1,0 +1,6 @@
+{{{define "internet-gateway"}}}
+"InternetGateway": {
+  "Type": "AWS::EC2::InternetGateway",
+  "Properties": {}
+}
+{{{end}}}

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+head -5 .travis.yml | tail -1 | cut -c 5- -

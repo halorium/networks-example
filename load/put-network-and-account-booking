@@ -1,0 +1,38 @@
+#!/bin/bash
+
+HOST=$1
+
+# Create Network
+curl $HOST/networks/26                    \
+     -X PUT                               \
+     -H "Content-Type: application/json"  \
+     -i                                   \
+     -d                                   \
+'{
+  "name": "Booking.com",
+  "variant": "booking",
+  "variations": {
+    "api-host": "https://admin.booking.com",
+    "days-per-request": "1",
+    "days-to-load": "45",
+    "rate-interval": "10s",
+    "rate-quantity": "1"
+  }
+}'
+
+# Create Network Account for France
+curl $HOST/networks/26/accounts/60       \
+     -X PUT                              \
+     -H "Content-Type: application/json" \
+     -i                                  \
+     -d                                  \
+'{
+  "name": "Booking.com",
+  "variant": "booking",
+  "variations": {
+    "additional-id": "123456",
+    "currency": "EUR",
+    "password": "password",
+    "username": "username"
+  }
+}'

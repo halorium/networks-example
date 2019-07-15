@@ -1,0 +1,8 @@
+version: '2'
+services:
+  sftp-server:
+    image: atmoz/sftp:alpine
+    volumes:
+      - ./rakuten/.ssh/keys/id_rsa.pub:/home/rakuten/.ssh/keys/id_rsa.pub:ro
+      - ./rakuten/home/:/home/rakuten/home/
+    command: rakuten:123:1001

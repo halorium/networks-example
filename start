@@ -1,0 +1,33 @@
+#!/bin/bash
+
+>&2 echo starting mock services...
+
+export IN_GIT_SHA=$(git/current-sha)
+
+docker/list-mock-services                         | \
+compatibility/xargs -n1 docker/hyphenate-pathname | \
+while read service; do
+  OUTPUT=$(
+    docker-compose up -d --remove-orphans $service 2>&1
+  ) || (echo "$OUTPUT" && exit 1) || exit 1
+done || exit 1
+
+>&2 echo starting application services...
+
+docker/list-services                              | \
+compatibility/xargs -n1 docker/hyphenate-pathname | \
+while read service; do
+  OUTPUT=$(
+    docker-compose up -d --remove-orphans $service 2>&1
+  ) || (echo "$OUTPUT" && exit 1) || exit 1
+done || exit 1
+
+>&2 echo starting datastore services...
+
+OUTPUT=$(
+  docker-compose up -d --remove-orphans \
+                 postgres               \
+                 sftp-server            2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

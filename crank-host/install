@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# to be used on AWS m4.large instance running Amazon Linux
+
+scp crank-host/setup-first-sudo     ec2-user@$CRANK_HOST: || exit 1
+scp crank-host/setup-second-no-sudo ec2-user@$CRANK_HOST: || exit 1
+
+ssh ec2-user@$CRANK_HOST sudo ./setup-first-sudo          || exit 1
+ssh ec2-user@$CRANK_HOST      ./setup-second-no-sudo      || exit 1
+
+exit 0

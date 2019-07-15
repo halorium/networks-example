@@ -1,0 +1,5 @@
+version: '2'
+services:
+  networks-worker:
+    image: networks-example/networks-worker
+    read_only: true

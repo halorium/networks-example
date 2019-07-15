@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DATE=$1
+
+if [[ "$DATE" = "" ]]; then
+       >&2 echo usage: $0 date
+       exit 1
+fi
+
+if [[ $(uname) = "Darwin" ]]; then
+       date -v +1d -j -f %Y-%m-%d $DATE +%Y-%m-%d || exit 1
+else
+       date -I -d "$DATE + 1 day"                 || exit 1
+fi
+
+exit 0

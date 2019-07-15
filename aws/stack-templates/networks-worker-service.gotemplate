@@ -1,0 +1,29 @@
+{{{define "networks-worker-service"}}}
+"NetworksWorkerService": {
+  "DependsOn": [
+    "PostNetworkAccountPurchasesLoadQueue",
+    "PutPurchaseInPostgresQueue",
+    "PutNetworkAccountPurchaseTopic"
+  ],
+  "Type": "AWS::ECS::Service",
+  "Properties": {
+    "Cluster": {
+      "Ref": "Cluster"
+    },
+    "DeploymentConfiguration": {
+      "MaximumPercent": "200",
+      "MinimumHealthyPercent": "50"
+    },
+    "DesiredCount": 8,
+    "PlacementStrategies": [
+      {
+        "Type": "spread",
+        "Field": "attribute:ecs.availability-zone"
+      }
+    ],
+    "TaskDefinition": {
+      "Ref": "NetworksWorkerTask"
+    }
+  }
+}
+{{{end}}}

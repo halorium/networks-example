@@ -1,0 +1,30 @@
+{{{define "roles-api-listener-rule"}}}
+"RolesApiListenerRule": {
+  "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+  "DependsOn": [
+    "ListenerTls"
+  ],
+  "Properties": {
+    "Actions": [
+      {
+        "TargetGroupArn": {
+          "Ref": "RolesApiTargetGroup"
+        },
+        "Type": "forward"
+      }
+    ],
+    "Conditions": [
+      {
+        "Field": "path-pattern",
+        "Values": [
+          "/roles*"
+        ]
+      }
+    ],
+    "ListenerArn": {
+      "Ref": "ListenerTls"
+    },
+    "Priority": 6
+  }
+}
+{{{end}}}

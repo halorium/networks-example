@@ -1,0 +1,9 @@
+#!/bin/bash
+
+>&2 echo deploying halorium/networks-example...
+
+validate/deployment-environment-variables                  || exit 1
+
+aws/deploy                                                 || exit 1
+
+exit 0

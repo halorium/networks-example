@@ -1,0 +1,31 @@
+#!/bin/bash
+
+>&2 echo getting tls files from s3...
+
+OUTPUT=$(
+  tls/get-files-created-at-from-s3  || exit 1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+CREATED=$OUTPUT
+
+if [[ "$CREATED" == "" ]]; then
+  >&2 echo "  tls files are not in s3..."
+  exit 2
+fi
+
+# this statement is tricky to read, I recommend reading it this way:
+#    "if certificate was created more than 75 days ago"
+if [[ "$CREATED" < "$(compatibility/days-ago 75)" ]]; then
+  >&2 echo "  tls files in s3 are stale..."
+  exit 2
+fi
+
+>&2 echo "  tls files in s3 are fresh..."
+
+aws                                                    \
+  s3                                                   \
+    sync                                               \
+      s3://halorium.networks-example/tls/files \
+      tls/files                                        || exit 1
+
+exit 0

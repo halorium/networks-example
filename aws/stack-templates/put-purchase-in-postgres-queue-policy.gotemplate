@@ -1,0 +1,33 @@
+{{{define "put-purchase-in-postgres-queue-policy"}}}
+"PutPurchaseInPostgresQueuePolicy": {
+  "DependsOn": [
+    "PutPurchaseInPostgresQueue"
+  ],
+  "Type": "AWS::SQS::QueuePolicy",
+  "Properties": {
+    "PolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "sns.amazonaws.com"
+          },
+          "Action": "sqs:SendMessage",
+          "Resource": {
+            "Fn::GetAtt": [
+              "PutPurchaseInPostgresQueue",
+              "Arn"
+            ]
+          }
+        }
+      ]
+    },
+    "Queues": [
+      {
+        "Ref": "PutPurchaseInPostgresQueue"
+      }
+    ]
+  }
+}
+{{{end}}}

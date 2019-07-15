@@ -1,0 +1,16 @@
+#!/bin/bash
+
+http-spec networks/specs/get-debug-pprof.htsf                      \
+          networks/specs/get-status.htsf                           \
+          networks/specs/get-networks.htsf                         \
+          networks/specs/get-network.htsf                          \
+          networks/specs/get-network-history.htsf                  \
+          networks/specs/get-network-accounts.htsf                 \
+          networks/specs/get-network-account.htsf                  \
+          networks/specs/get-network-account-history.htsf          \
+          networks/specs/get-network-account-purchases.htsf        \
+          networks/specs/get-network-account-purchase.htsf         \
+          networks/specs/get-network-account-purchase-updates.htsf \
+          networks/specs/get-network-account-purchase-history.htsf || exit 1
+
+exit 0

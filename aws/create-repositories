@@ -1,0 +1,30 @@
+#!/bin/bash
+
+>&2 echo creating repositories...
+
+eval $(aws ecr get-login)   || exit 1
+
+{
+  docker/list-services;
+  echo migrator-service;
+}                                                 | \
+compatibility/xargs -n1 docker/hyphenate-pathname | \
+while read service; do
+  REPOSITORY_NAME=$IN_GIT_BRANCH-$service         || exit 1
+
+  OUTPUT=$(
+    aws                                      \
+      ecr                                    \
+        create-repository                    \
+          --repository-name $REPOSITORY_NAME 2>&1
+  )
+
+  if [[ "$?" -ne "0" ]]; then
+    if [[ "$OUTPUT" != *"RepositoryAlreadyExistsException"* ]]; then
+      echo "$OUTPUT"
+      exit 1
+    fi
+  fi
+done || exit 1
+
+exit 0

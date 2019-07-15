@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# already loaded by ./run-put
+http-spec networks/specs/delete-network-conflict.htsf          || exit 1
+http-spec networks/specs/delete-network-account-conflict.htsf  || exit 1
+http-spec networks/specs/delete-network-accounts-conflict.htsf || exit 1
+http-spec networks/specs/delete-network-account-purchases.htsf || exit 1
+http-spec networks/specs/delete-network-account.htsf           || exit 1
+http-spec networks/specs/delete-network-accounts.htsf          || exit 1
+http-spec networks/specs/delete-network.htsf                   || exit 1
+
+exit 0

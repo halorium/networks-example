@@ -1,0 +1,10 @@
+{{{define "route-table"}}}
+"RouteTable": {
+  "Type": "AWS::EC2::RouteTable",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    }
+  }
+}
+{{{end}}}

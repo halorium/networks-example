@@ -1,0 +1,39 @@
+{{{define "cycler-service-task"}}}
+"CyclerServiceTask": {
+  "DependsOn": [
+    "TaskPolicy"
+  ],
+  "Type": "AWS::ECS::TaskDefinition",
+  "Properties": {
+    "ContainerDefinitions": [
+      {
+        "DockerSecurityOptions": [
+          "no-new-privileges"
+        ],
+        "Environment": [
+          {{{- template "environment" -}}}
+        ],
+        "Essential": true,
+        "Image": {
+          "Fn::Sub": "${InDockerRegistry}/${AWS::StackName}-cycler-service:${InGitSha}"
+        },
+        "LogConfiguration": {
+          {{{- template "task-log-configuration" -}}}
+        },
+        "MemoryReservation": 64,
+        "Name": "cycler-service",
+        "ReadonlyRootFilesystem": true
+      }
+    ],
+    "Family": {
+      "Fn::Sub": "${AWS::StackName}-cycler-service"
+    },
+    "TaskRoleArn": {
+      "Fn::GetAtt": [
+        "TaskRole",
+        "Arn"
+      ]
+    }
+  }
+}
+{{{end}}}

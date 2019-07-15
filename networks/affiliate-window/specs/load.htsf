@@ -1,0 +1,83 @@
+> PUT http://networks-api/networks/6 HTTP/1.1
+>
+> {
+>   "name": "Affiliate Window",
+>   "variant": "affiliate-window",
+>   "variations": {
+>     "api-host": "http://networks-affiliate-window-mock-api",
+>     "days-per-request": "10",
+>     "days-to-load": "90",
+>     "rate-interval": "10s",
+>     "rate-quantity": "1"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: c023c818808a589b9a842648597ac4699f7285a9b35abf5f4d37b71fc824b05b
+< In-Network-Id: 6
+< In-Variation-Version: 5a7a3bd24e6a7aff5244f10b96b179964cdee24de587436c7413a1cc8ea37fd3
+<
+< {
+<   "name": "Affiliate Window",
+<   "variant": "affiliate-window",
+<   "variations": {
+<     "api-host": "http://networks-affiliate-window-mock-api",
+<     "days-per-request": "10",
+<     "days-to-load": "90",
+<     "rate-interval": "10s",
+<     "rate-quantity": "1"
+<   }
+< }
+
+> PUT http://networks-api/networks/6/accounts/13 HTTP/1.1
+>
+> {
+>   "name": "Affiliate Window - UK",
+>   "variant": "affiliate-window",
+>   "variations": {
+>     "additional-id": "68727",
+>     "currency": "GBP",
+>     "token": "some-long-api-token"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: ea068c510d0509f2ac60319af919cf205372b0da8999836287934cf72dafc5c3
+< In-Network-Account-Id: 13
+< In-Network-Id: 6
+< In-Variation-Version: 1f91b69c94426dc1123c56a11b66215accdec70fabffab8089c644afd24cdba7
+<
+< {
+<   "name": "Affiliate Window - UK",
+<   "variant": "affiliate-window",
+<   "variations": {
+<     "additional-id": "68727",
+<     "currency": "GBP",
+<     "token": "some-long-api-token"
+<   }
+< }
+
+> POST http://networks-api/networks/6/accounts/13/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-01T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 202 Accepted
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "start-time": "2017-01-01T00:00:00.000000Z",
+<   "stop-time": "2017-01-01T23:59:59.999999Z"
+< }

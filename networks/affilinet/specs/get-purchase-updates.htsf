@@ -1,0 +1,144 @@
+> GET http://networks-api/networks/3/accounts/20/purchase-updates?created-at=⧈YYYY-MM-DD⧈ HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "e485bc3e7970d8c9305bd37c76a1fba7d5d64d653892abdf6169f121ae6fdbda",
+<       "network-account-id": "20",
+<       "network-id": "3",
+<       "purchase-id": "285045500",
+<       "variation-version": "4aa55f550bb3b741103e25559d16875ee05ba49c14c9ce407142545e98bd1fd3"
+<     },
+<     "body": {
+<       "click-id": "t594661171m",
+<       "commission-amount": "9.11",
+<       "currency": "GBP",
+<       "date": "2017-04-23T13:47:28.000000Z",
+<       "order-id": "306400941",
+<       "sale-amount": "182.22",
+<       "status": "OPEN",
+<       "variant": "affilinet",
+<       "variations": {
+<         "basket-info": {
+<           "basket-id": "306400941",
+<           "open-basket-item-count": "1",
+<           "registered-net-price": "182.22",
+<           "total-basket-item-count": "1"
+<         },
+<         "cancellation-reason": "",
+<         "check-date": "",
+<         "click-date": "2017-04-23T13:38:24",
+<         "creative-info": {
+<           "creative-number": "1",
+<           "creative-type": "Text"
+<         },
+<         "net-price": "182.22",
+<         "program-id": "10043",
+<         "program-title": "Holiday Autos",
+<         "publisher-commission": "9.11",
+<         "rate-info": "",
+<         "registration-date": "2017-04-23T13:47:28",
+<         "sub-id": "t594661171m",
+<         "tracking-method": "PostClick",
+<         "transaction-id": "285045500",
+<         "transaction-status": "Open"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "52ce0560ddf2bbf43bb95ab0070869d882a9e3031308e7d39c0bf23b5f907f10",
+<       "network-account-id": "20",
+<       "network-id": "3",
+<       "purchase-id": "285053963",
+<       "variation-version": "799fa696df1120a1ab668999ec4bbff271277fa8fd9899b2b76d245425f7228c"
+<     },
+<     "body": {
+<       "click-id": "t594661838m",
+<       "commission-amount": "55.8",
+<       "currency": "GBP",
+<       "date": "2017-04-23T15:31:45.000000Z",
+<       "order-id": "306410716",
+<       "sale-amount": "2231.98",
+<       "status": "OPEN",
+<       "variant": "affilinet",
+<       "variations": {
+<         "basket-info": {
+<           "basket-id": "306410716",
+<           "open-basket-item-count": "1",
+<           "registered-net-price": "2231.98",
+<           "total-basket-item-count": "1"
+<         },
+<         "cancellation-reason": "",
+<         "check-date": "",
+<         "click-date": "2017-04-23T15:21:27",
+<         "creative-info": {
+<           "creative-number": "1",
+<           "creative-type": "Text"
+<         },
+<         "net-price": "2231.98",
+<         "program-id": "9415",
+<         "program-title": "Thomas Cook UK",
+<         "publisher-commission": "55.8",
+<         "rate-info": "",
+<         "registration-date": "2017-04-23T15:31:45",
+<         "sub-id": "t594661838m",
+<         "tracking-method": "PostClick",
+<         "transaction-id": "285053963",
+<         "transaction-status": "Open"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "5f9e85ec792f66df4715e6cb01b0271a323a01afb0f0710dd059f2e892e1beef",
+<       "network-account-id": "20",
+<       "network-id": "3",
+<       "purchase-id": "285092489",
+<       "variation-version": "3b16346fc19ba980c882bb1c6f2dd73dc55743184670ffd2097ef319fd52788c"
+<     },
+<     "body": {
+<       "click-id": "t594664770m",
+<       "commission-amount": "4.02",
+<       "currency": "GBP",
+<       "date": "2017-04-23T22:25:50.000000Z",
+<       "order-id": "306454576",
+<       "sale-amount": "80.33",
+<       "status": "OPEN",
+<       "variant": "affilinet",
+<       "variations": {
+<         "basket-info": {
+<           "basket-id": "306454576",
+<           "open-basket-item-count": "1",
+<           "registered-net-price": "80.33",
+<           "total-basket-item-count": "1"
+<         },
+<         "cancellation-reason": "",
+<         "check-date": "",
+<         "click-date": "2017-04-23T22:08:57",
+<         "creative-info": {
+<           "creative-number": "1",
+<           "creative-type": "Text"
+<         },
+<         "net-price": "80.33",
+<         "program-id": "10043",
+<         "program-title": "Holiday Autos",
+<         "publisher-commission": "4.02",
+<         "rate-info": "",
+<         "registration-date": "2017-04-23T22:25:50",
+<         "sub-id": "t594664770m",
+<         "tracking-method": "PostClick",
+<         "transaction-id": "285092489",
+<         "transaction-status": "Open"
+<       }
+<     }
+<   }
+< ]

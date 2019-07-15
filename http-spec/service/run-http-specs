@@ -1,0 +1,27 @@
+#!/bin/bash
+
+http-spec $(find . -name mock.htsf)                 || exit 1
+
+roles/specs/run-put                                 || exit 1
+identities/specs/run-put                            || exit 1
+authentication/specs/run-put                        || exit 1
+networks/specs/run-put                              || exit 1
+http-spec $(find . -name load.htsf)                 || exit 1
+
+sleep 10 # wait for async processes to complete
+
+panic/specs/run-get                                 || exit 1
+status/specs/run-get                                || exit 1
+
+roles/specs/run-get                                 || exit 1
+identities/specs/run-get                            || exit 1
+authentication/specs/run-get                        || exit 1
+networks/specs/run-get                              || exit 1
+
+http-spec $(find . -name get-purchase-updates.htsf) || exit 1
+
+# deletes must run last!
+# delete endpoints are waiting for TLS encryption
+# networks/specs/run-delete                    || exit 1
+
+exit 0

@@ -1,0 +1,4 @@
+version: '2'
+services:
+  migrator-service:
+    image: networks-example/migrator-service

@@ -1,0 +1,22 @@
+{{{define "post-network-account-purchases-load-subscription"}}}
+"PostNetworkAccountPurchasesLoadSubcription": {
+  "DependsOn": [
+    "PostNetworkAccountPurchasesLoadTopic",
+    "PostNetworkAccountPurchasesLoadQueue",
+    "PostNetworkAccountPurchasesLoadQueuePolicy"
+  ],
+  "Type": "AWS::SNS::Subscription",
+  "Properties": {
+    "Endpoint": {
+      "Fn::GetAtt": [
+        "PostNetworkAccountPurchasesLoadQueue",
+        "Arn"
+      ]
+    },
+    "Protocol": "sqs",
+    "TopicArn": {
+      "Ref": "PostNetworkAccountPurchasesLoadTopic"
+    }
+  }
+}
+{{{end}}}

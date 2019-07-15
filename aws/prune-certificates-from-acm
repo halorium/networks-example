@@ -1,0 +1,13 @@
+#!/bin/bash
+
+>&2 echo pruning tls certificates from acm...
+
+aws/acm-certificate-arns-not-in-use | \
+while read arn; do
+  aws                                 \
+    acm                               \
+      delete-certificate              \
+        --certificate-arn $arn      || exit 1
+done || exit 1
+
+exit 0

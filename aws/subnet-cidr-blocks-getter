@@ -1,0 +1,27 @@
+#!/bin/bash
+
+OUTPUTS=$(aws/get-stack-outputs) || exit 1
+
+IN_SUBNET_CIDR_BLOCK_0=$(
+  echo "$OUTPUTS" | \
+  jq --raw-output '.[] | select(.OutputKey=="InSubnetCidrBlock0") | .OutputValue'
+) || exit 1
+
+IN_SUBNET_CIDR_BLOCK_1=$(
+  echo "$OUTPUTS" | \
+  jq --raw-output '.[] | select(.OutputKey=="InSubnetCidrBlock1") | .OutputValue'
+) || exit 1
+
+IN_SUBNET_CIDR_BLOCK_2=$(
+  echo "$OUTPUTS" | \
+  jq --raw-output '.[] | select(.OutputKey=="InSubnetCidrBlock2") | .OutputValue'
+) || exit 1
+
+IN_SUBNET_CIDR_BLOCK_3=$(
+  echo "$OUTPUTS" | \
+  jq --raw-output '.[] | select(.OutputKey=="InSubnetCidrBlock3") | .OutputValue'
+) || exit 1
+
+echo $IN_SUBNET_CIDR_BLOCK_0,$IN_SUBNET_CIDR_BLOCK_1,$IN_SUBNET_CIDR_BLOCK_2,$IN_SUBNET_CIDR_BLOCK_3
+
+exit 0

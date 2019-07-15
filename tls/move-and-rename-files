@@ -1,0 +1,14 @@
+#!/bin/bash
+
+>&2 echo move and rename certificate files...
+
+mkdir -p tls/files                                                        || exit 1
+
+cp  tls/certbot-files/live/wildcard/cert.pem    tls/files/certificate.pem || exit 1
+cp  tls/certbot-files/live/wildcard/chain.pem   tls/files/chain.pem       || exit 1
+cp  tls/certbot-files/live/wildcard/privkey.pem tls/files/private-key.pem || exit 1
+
+cat tls/files/certificate.pem \
+    tls/files/chain.pem       > tls/files/certificate-chain.pem           || exit 1
+
+exit 0

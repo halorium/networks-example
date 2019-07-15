@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CURRENT_BRANCH=$(git/current-branch)
+
+git/fetch-prune              || exit 1
+git checkout master          || exit 1
+git pull                     || exit 1
+
+git checkout $CURRENT_BRANCH || exit 1
+
+for branch in $(git/local-branches-master-first-current-last); do
+  git checkout $branch       || exit 1
+  git rebase   master        || exit 1
+done || exit 1
+
+exit 0

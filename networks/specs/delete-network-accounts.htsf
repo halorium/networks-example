@@ -1,0 +1,125 @@
+> PUT http://networks-api/networks/456 HTTP/1.1
+>
+> {
+>   "name": "Dummy",
+>   "variant": "dummy",
+>   "variations": {
+>     "api-host": "sftp-server",
+>     "days-per-request": "1",
+>     "days-to-load": "45",
+>     "rate-interval": "10s",
+>     "rate-quantity": "1"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 9d0ed220949cc6c1e51960f2023e9ae385f875bcd08f55b95c3bec75ec7d7bfe
+< In-Network-Id: 456
+< In-Variation-Version: 5efb5d7fd85a58411d5ee26b3f89c3cd51264941ac37d82409f19934ef8b5eef
+<
+< {
+<   "name": "Dummy",
+<   "variant": "dummy",
+<   "variations": {
+<     "api-host": "sftp-server",
+<     "days-per-request": "1",
+<     "days-to-load": "45",
+<     "rate-interval": "10s",
+<     "rate-quantity": "1"
+<   }
+< }
+
+> PUT http://networks-api/networks/456/accounts/123 HTTP/1.1
+>
+> {
+>   "name": "Dummy",
+>   "variant": "dummy",
+>   "variations": {
+>     "currency": "USD",
+>     "password": "password",
+>     "username": "username"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: d7a8e513c3be5de21b0e5456af017de18f98aaeea5e846fe0458e38ac1120259
+< In-Network-Account-Id: 123
+< In-Network-Id: 456
+< In-Variation-Version: d138a777ecda5e7cef6c2aa3618fa51660a59118c16034843850d3e9765c2413
+<
+< {
+<   "name": "Dummy",
+<   "variant": "dummy",
+<   "variations": {
+<     "currency": "USD",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> PUT http://networks-api/networks/456/accounts/456 HTTP/1.1
+>
+> {
+>   "name": "Dummy",
+>   "variant": "dummy",
+>   "variations": {
+>     "currency": "USD",
+>     "password": "password",
+>     "username": "username"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: d7a8e513c3be5de21b0e5456af017de18f98aaeea5e846fe0458e38ac1120259
+< In-Network-Account-Id: 456
+< In-Network-Id: 456
+< In-Variation-Version: d138a777ecda5e7cef6c2aa3618fa51660a59118c16034843850d3e9765c2413
+<
+< {
+<   "name": "Dummy",
+<   "variant": "dummy",
+<   "variations": {
+<     "currency": "USD",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> DELETE http://networks-api/networks/456/accounts HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> GET http://networks-api/networks/456/accounts/123 HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> GET http://networks-api/networks/456/accounts/456 HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

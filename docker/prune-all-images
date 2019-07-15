@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo pruning all images...
+
+docker/prune-service-images
+docker/prune-mock-service-images
+docker/prune-http-spec-image
+docker/prune-migrator-service-image
+docker/prune-temp-images
+
+exit 0

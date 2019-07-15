@@ -1,0 +1,10 @@
+#!/bin/bash
+
+aws                                                                                                  \
+  acm                                                                                                \
+    list-certificates                                                                              | \
+jq                                                                                                   \
+  --raw-output                                                                                       \
+  ".CertificateSummaryList[] | select(.DomainName | contains(\"*.v1.networksexample.com\")) | .CertificateArn" || exit 1
+
+exit 0

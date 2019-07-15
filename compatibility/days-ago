@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DAYS_AGO=$1
+
+if [[ $(uname) = "Darwin" ]]; then
+  date -j -v-${DAYS_AGO}d +"%Y-%m-%d"        || exit 1
+else
+  date --date="$DAYS_AGO days ago" +%Y-%m-%d || exit 1
+fi
+
+exit 0

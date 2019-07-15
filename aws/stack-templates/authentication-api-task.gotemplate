@@ -1,0 +1,47 @@
+{{{define "authentication-api-task"}}}
+"AuthenticationApiTask": {
+  "DependsOn": [
+    "TaskPolicy"
+  ],
+  "Type": "AWS::ECS::TaskDefinition",
+  "Properties": {
+    "ContainerDefinitions": [
+      {
+        "DockerSecurityOptions": [
+          "no-new-privileges"
+        ],
+        "Environment": [
+          {{{- template "environment" -}}}
+        ],
+        "Essential": true,
+        "Image": {
+          "Fn::Sub": "${InDockerRegistry}/${AWS::StackName}-authentication-api:${InGitSha}"
+        },
+        "LogConfiguration": {
+          {{{- template "task-log-configuration" -}}}
+        },
+        "MemoryReservation": 64,
+        "Name": "authentication-api",
+        "PortMappings": [
+          {
+            "ContainerPort": 443
+          },
+          {
+            "ContainerPort": 444
+          }
+        ],
+        "ReadonlyRootFilesystem": true
+      }
+    ],
+    "Family": {
+      "Fn::Sub": "${AWS::StackName}-authentication-api"
+    },
+    "TaskRoleArn": {
+      "Fn::GetAtt": [
+        "TaskRole",
+        "Arn"
+      ]
+    }
+  }
+}
+{{{end}}}

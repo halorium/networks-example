@@ -1,0 +1,48 @@
+> GET http://networks-api/networks/123/accounts/456/history HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Network-Account-Id: 456
+< In-Network-Id: 123
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "03e1b663b2043893813c16c3ffffb2a546a6de647a82f752ebb4528fc5b0bb2f",
+<       "network-account-id": "456",
+<       "network-id": "123",
+<       "variation-version": "ebf104edc4dfe960d52b4727ad4dc37a50ed46eb96dbb8b590edfe80f29f8a1b"
+<     },
+<     "body": {
+<       "name": "Rakuten - UK",
+<       "variant": "rakuten",
+<       "variations": {
+<         "currency": "GBP",
+<         "password": "password",
+<         "username": "username"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "e0bd1ac3db588c935e17b300bad6dfb7f71086c14f51ec471d3376a78e8ddd31",
+<       "network-account-id": "456",
+<       "network-id": "123",
+<       "variation-version": "ebf104edc4dfe960d52b4727ad4dc37a50ed46eb96dbb8b590edfe80f29f8a1b"
+<     },
+<     "body": {
+<       "name": "Rakuten - United Kingdom",
+<       "variant": "rakuten",
+<       "variations": {
+<         "currency": "GBP",
+<         "password": "password",
+<         "username": "username"
+<       }
+<     }
+<   }
+< ]

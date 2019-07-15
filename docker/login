@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo Logging in to $IN_DOCKER_REGISTRY...
+
+OUTPUT=$(
+  eval $(
+    aws ecr get-login 2>&1 || exit 1
+  ) || exit 1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

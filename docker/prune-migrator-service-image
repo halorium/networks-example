@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo pruning migrator-service image...
+
+docker images              | \
+egrep 'migrator-service'   | \
+awk '{print $3}'           | \
+compatibility/xargs          \
+docker rmi -f &> /dev/null || exit 1
+
+exit 0

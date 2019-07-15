@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ $(uname) = "Darwin" ]]; then
+  xargs $@    || exit 1
+else
+  xargs -r $@ || exit 1
+fi
+
+exit 0

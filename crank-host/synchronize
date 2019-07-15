@@ -1,0 +1,15 @@
+#!/bin/bash
+
+>&2 echo synchronizing crank host...
+
+rsync -az                                                                        \
+      -e ssh                                                                     \
+      --compress                                                                 \
+      --delete-during                                                            \
+      --exclude-from=crank-host/synchronize-exclude-patterns                     \
+      --itemize-changes                                                          \
+      .                                                                          \
+      ec2-user@$CRANK_HOST:go/src/github.com/halorium/networks-example | \
+      (grep -v \.d\.\.t\.\.\.\. || echo "already in sync...")                  || exit 1
+
+exit 0

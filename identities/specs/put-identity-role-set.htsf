@@ -1,0 +1,78 @@
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.6@email.com",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 201 Created
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: f497dbb0c5b4d1b0452acd0e4023f7e36241808e08727929205d89a6db03ecfb
+< In-Identity-Id: ⧆identity-id⧆:b62:22⧆
+< In-Variation-Version: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+<
+< {
+<   "name": "John Doe",
+<   "email": "john.doe.6@email.com",
+<   "variant": "password",
+<   "variations": {}
+< }
+
+> PUT http://identities-api/identities/⧈identity-id⧈/role-set HTTP/1.1
+>
+> {
+>   "roles": [
+>     "admin"
+>   ]
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: bd74150adadebf589c23733a18a3ef81133b443bad65e04da9041dee2fe52a6d
+< In-Identity-Id: ⧈identity-id⧈
+<
+< {
+<   "roles": [
+<     "admin"
+<   ]
+< }
+
+> PUT http://identities-api/identities/invalid/role-set HTTP/1.1
+>
+> {
+>   "roles": [
+>     "admin"
+>   ]
+> }
+
+< HTTP/1.1 404 Not Found
+< Content-Length: 0
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> PUT http://identities-api/identities/⧈identity-id⧈/role-set HTTP/1.1
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: 66
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "malformed body"
+<     }
+<   ]
+< }

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+>&2 echo migrating...
+
+OUTPUT=$(
+  aws                                                     \
+    ecs                                                   \
+      run-task                                            \
+        --cluster $IN_GIT_BRANCH                          \
+        --task-definition $IN_GIT_BRANCH-migrator-service \
+        --count 1                                         2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+TASK_ARN=$(
+  echo "$OUTPUT" | jq --raw-output '.tasks[].taskArn'
+)
+
+while true; do
+  >&2 echo checking migration status...
+
+  sleep 10
+
+  TASK_DESCRIPTION=$(
+    aws                            \
+      ecs                          \
+        describe-tasks             \
+          --cluster $IN_GIT_BRANCH \
+          --tasks $TASK_ARN
+  ) || (echo $TASK_DESCRIPTION && exit 1) || exit 1
+
+  EXIT_CODE=$(
+    echo $TASK_DESCRIPTION | jq --raw-output '.tasks[].containers[].exitCode'
+  )
+
+  if [[ "$EXIT_CODE" = "null" ]]; then
+    continue
+  fi
+
+  echo "migrator exited with $EXIT_CODE..."
+
+  exit $EXIT_CODE
+done || exit 1
+
+exit 0

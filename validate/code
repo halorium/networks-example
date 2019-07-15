@@ -1,0 +1,53 @@
+#!/bin/bash
+
+>&2 echo validating code...
+
+gometalinter --deadline=120s      \
+             --disable-all        \
+             --enable=goimports   \
+             --enable=gotypex     \
+             --enable=ineffassign \
+             --enable=interfacer  \
+             --enable=safesql     \
+             --enable=staticcheck \
+             --enable=structcheck \
+             --enable=unconvert   \
+             --enable=unparam     \
+             --enable=varcheck    \
+             --enable=vet         \
+             ./... || exit 1
+
+             # --enable=gosimple    \
+             # --enable=deadcode    \
+             # --enable=dupl        \
+             # --enable=errcheck    \
+             # --enable=gas         \
+             # --enable=goconst     \
+             # --enable=gocyclo     \
+             # --enable=golint      \
+             # --enable=gotype      \
+             # --enable=lll         \
+             # --enable=maligned    \
+             # --enable=misspell    \
+             # --enable=vetshadow   \
+
+OUTPUT=$(
+  golint  ./... | \
+  grep -v "should have comment or be unexported" 2>&1
+)
+
+if [[ "$OUTPUT" != "" ]]; then
+  echo "$OUTPUT"
+  exit 1
+fi
+
+OUTPUT=$(
+  prealloc -forloops ./... 2>&1
+)
+
+if [[ "$OUTPUT" != "" ]]; then
+  echo "$OUTPUT"
+  exit 1
+fi
+
+exit 0

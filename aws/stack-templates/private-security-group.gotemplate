@@ -1,0 +1,13 @@
+{{{define "private-security-group"}}}
+"PrivateSecurityGroup": {
+  "Type": "AWS::EC2::SecurityGroup",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "GroupDescription": {
+      "Fn::Sub": "${AWS::StackName}-private"
+    }
+  }
+}
+{{{end}}}

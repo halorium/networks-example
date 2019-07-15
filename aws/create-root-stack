@@ -1,0 +1,15 @@
+#!/bin/bash
+
+>&2 echo attempting to create root stack...
+
+OUTPUT=$(
+  aws                                                                                    \
+    cloudformation                                                                       \
+      create-stack                                                                       \
+        --template-body file://aws/root-stack-template/root.json                         \
+        --stack-name root                                                                \
+        --parameters                                                                     \
+          ParameterKey=InRootBucketName,ParameterValue=halorium.networks-example 2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

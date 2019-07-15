@@ -1,0 +1,126 @@
+> GET http://networks-api/networks/26/accounts/60/purchase-updates?created-at=⧈YYYY-MM-DD⧈ HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "5ac525d59ae7177a78e23ca3d7ea7dfd15a2cf8d64407f98f50ff473a4993d8d",
+<       "network-account-id": "60",
+<       "network-id": "26",
+<       "purchase-id": "1060471607",
+<       "variation-version": "d6c9373de7b179701d803932f45e8b81be17c4047f9b36499688b6469450825b"
+<     },
+<     "body": {
+<       "click-id": "t593568399m",
+<       "commission-amount": "6.24",
+<       "currency": "EUR",
+<       "date": "2017-01-01T16:59:51.000000Z",
+<       "order-id": "1060471607",
+<       "sale-amount": "17.82",
+<       "status": "OPEN",
+<       "variant": "booking",
+<       "variations": {
+<         "accomodation-type": "Hotel",
+<         "affiliate-id": "334402",
+<         "arrival": "2017-01-02",
+<         "book-number": "1060471607",
+<         "booked": "2017-01-01 16:59:51",
+<         "booker-country": "France",
+<         "booker-language": "French",
+<         "comission": "17.82",
+<         "departure": "2017-01-03",
+<         "fee": "6.24",
+<         "hotel-city": "Pisa",
+<         "hotel-country": "Italy",
+<         "hotel-name": "Hotel Touring",
+<         "hotel-ufi": "-124918",
+<         "label": "t593568399m",
+<         "percent": "35",
+<         "slip-number": "hsnl007162"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "603908731567a5cb9353ad801079185a29aa9a431366b51c510b74549ae4cd2a",
+<       "network-account-id": "60",
+<       "network-id": "26",
+<       "purchase-id": "1334716491",
+<       "variation-version": "a162ac7a4bf932c1fc7e3d4e6a9a922c4842787005aa2dd191ec9e0eefaed2ae"
+<     },
+<     "body": {
+<       "click-id": "t593598821m",
+<       "commission-amount": "0",
+<       "currency": "EUR",
+<       "date": "2017-01-04T14:28:54.000000Z",
+<       "order-id": "1334716491",
+<       "sale-amount": "0",
+<       "status": "OPEN",
+<       "variant": "booking",
+<       "variations": {
+<         "accomodation-type": "Hotel",
+<         "affiliate-id": "334402",
+<         "arrival": "2017-03-06",
+<         "book-number": "1334716491",
+<         "booked": "2017-01-04 14:28:54",
+<         "booker-country": "France",
+<         "booker-language": "French",
+<         "comission": "0.00",
+<         "departure": "2017-03-08",
+<         "fee": "0.00",
+<         "hotel-city": "Biarritz",
+<         "hotel-country": "France",
+<         "hotel-name": "Hôtel Saint James",
+<         "hotel-ufi": "-1412526",
+<         "label": "t593598821m",
+<         "percent": "35",
+<         "slip-number": "-"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "307a84c47a0ab248212abd079044ae1e222881a573b71c88fb502bf446eb5dfc",
+<       "network-account-id": "60",
+<       "network-id": "26",
+<       "purchase-id": "1463241658",
+<       "variation-version": "007314d3008bf1f274c3c724f5091ce3f76f2ed0603b220ee6c4a656cde74d61"
+<     },
+<     "body": {
+<       "click-id": "t593574825m",
+<       "commission-amount": "2.5",
+<       "currency": "EUR",
+<       "date": "2017-01-02T11:35:41.000000Z",
+<       "order-id": "1463241658",
+<       "sale-amount": "7.15",
+<       "status": "OPEN",
+<       "variant": "booking",
+<       "variations": {
+<         "accomodation-type": "Hotel",
+<         "affiliate-id": "334402",
+<         "arrival": "2017-01-04",
+<         "book-number": "1463241658",
+<         "booked": "2017-01-02 11:35:41",
+<         "booker-country": "France",
+<         "booker-language": "French",
+<         "comission": "7.15",
+<         "departure": "2017-01-05",
+<         "fee": "2.50",
+<         "hotel-city": "Saint-Paul-lès-Dax",
+<         "hotel-country": "France",
+<         "hotel-name": "Kyriad Dax St-Paul-Les-Dax",
+<         "hotel-ufi": "-1467816",
+<         "label": "t593574825m",
+<         "percent": "35",
+<         "slip-number": "hsnl007162"
+<       }
+<     }
+<   }
+< ]

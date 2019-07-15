@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git branch | egrep ^\\* | cut -d ' ' -f2 || exit 1
+
+exit 0

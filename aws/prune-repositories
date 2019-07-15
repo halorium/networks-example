@@ -1,0 +1,45 @@
+#!/bin/bash
+
+>&2 echo pruning repositories...
+
+STACK_NAMES=$(
+  aws cloudformation describe-stacks               | \
+  jq --raw-output '.Stacks[].StackName'            || exit 1
+) || exit 1
+
+REPOSITORIES=$(
+  aws ecr describe-repositories                    || exit 1
+) || exit 1
+
+REPOSITORY_NAMES=$(
+  echo "$REPOSITORIES"                             | \
+  jq --raw-output '.repositories[].repositoryName' | \
+  egrep -v ^master                                 || exit 1
+) || exit 1
+
+# filter repository names that begin with stack names
+for STACK_NAME in $STACK_NAMES; do
+  REPOSITORY_NAMES=$(
+    echo "$REPOSITORY_NAMES" | \
+    egrep -v ^$STACK_NAME
+  )
+done || exit 1
+
+if [[ "$REPOSITORY_NAMES" = "" ]]; then
+  >&2 echo "no repositories pruned..."
+  exit 0
+fi
+
+for REPOSITORY_NAME in $REPOSITORY_NAMES; do
+  OUTPUT=$(
+    aws                   \
+      ecr                 \
+        delete-repository \
+          --force         \
+          --repository-name $REPOSITORY_NAME 2>&1 || exit 1
+  ) || (echo "$OUTPUT" && exit 1) || exit 1
+
+  >&2 echo "  $REPOSITORY_NAME..."
+done || exit 1
+
+exit 0

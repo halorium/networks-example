@@ -1,0 +1,47 @@
+{{{define "identities-api-task"}}}
+"IdentitiesApiTask": {
+  "DependsOn": [
+    "TaskPolicy"
+  ],
+  "Type": "AWS::ECS::TaskDefinition",
+  "Properties": {
+    "ContainerDefinitions": [
+      {
+        "DockerSecurityOptions": [
+          "no-new-privileges"
+        ],
+        "Environment": [
+          {{{- template "environment" -}}}
+        ],
+        "Essential": true,
+        "Image": {
+          "Fn::Sub": "${InDockerRegistry}/${AWS::StackName}-identities-api:${InGitSha}"
+        },
+        "LogConfiguration": {
+          {{{- template "task-log-configuration" -}}}
+        },
+        "MemoryReservation": 64,
+        "Name": "identities-api",
+        "PortMappings": [
+          {
+            "ContainerPort": 443
+          },
+          {
+            "ContainerPort": 444
+          }
+        ],
+        "ReadonlyRootFilesystem": true
+      }
+    ],
+    "Family": {
+      "Fn::Sub": "${AWS::StackName}-identities-api"
+    },
+    "TaskRoleArn": {
+      "Fn::GetAtt": [
+        "TaskRole",
+        "Arn"
+      ]
+    }
+  }
+}
+{{{end}}}

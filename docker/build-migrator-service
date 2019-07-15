@@ -1,0 +1,47 @@
+#!/bin/bash
+
+SERVICE_PATH=migrator/service
+SERVICE_NAME=$(docker/hyphenate-pathname $SERVICE_PATH) || exit 1
+
+IMAGE=$(docker images | grep $SERVICE_NAME)
+MODIFIED=$(git status -s $SERVICE_PATH)
+
+if [[ "$IMAGE" != "" ]] && [[ "$MODIFIED" == "" ]]; then
+  >&2 echo skip building $SERVICE_NAME...
+  exit 0
+fi
+
+>&2 echo building migrations...
+
+REPOSITORY_ROOT=$(pwd)
+
+EXECUTABLE_PATH=$REPOSITORY_ROOT/$SERVICE_PATH/executables
+
+(
+  cd $SERVICE_PATH                                      || exit 1
+
+  mkdir -p executables                                  || exit 1
+
+  cd migrations
+
+  for MIGRATION in *
+  do
+    >&2 echo "  $MIGRATION..."
+
+    if [[ -d $MIGRATION ]]; then
+      (
+        cd $MIGRATION                                   || exit 1
+        $REPOSITORY_ROOT/go/build $MIGRATION            || exit 1
+        mv $MIGRATION $EXECUTABLE_PATH/$MIGRATION
+      ) || exit 1
+    else
+      cp $MIGRATION $EXECUTABLE_PATH/$MIGRATION
+    fi
+  done || exit 1
+) || exit 1
+
+docker/build-service $SERVICE_PATH                      || exit 1
+
+rm -rf $EXECUTABLE_PATH
+
+exit 0

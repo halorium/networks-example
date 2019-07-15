@@ -1,0 +1,14 @@
+{{{define "post-network-account-purchases-load-redrive-queue"}}}
+"PostNetworkAccountPurchasesLoadRedriveQueue": {
+  "Type": "AWS::SQS::Queue",
+  "Properties": {
+    "MaximumMessageSize": 262144,
+    "MessageRetentionPeriod": 1209600,
+    "QueueName": {
+      "Fn::Sub": "${AWS::StackName}-post-network-account-purchases-load-redrive"
+    },
+    "ReceiveMessageWaitTimeSeconds": 20,
+    "VisibilityTimeout": 30
+  }
+}
+{{{end}}}

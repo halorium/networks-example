@@ -1,0 +1,52 @@
+dist: trusty
+sudo: false
+language: go
+go:
+  - 1.12.6
+group: deprecated-2017Q4
+services:
+  - docker
+addons:
+  artifacts:
+    paths:
+     - artifacts
+env:
+  global:
+    - AWS_ACCESS_KEY_ID=SOME_SECRET
+    # AWS_SECRET_ACCESS_KEY=
+    - secure: "SOME_SECRET"
+    - AWS_REGION=us-east-1
+    - AWS_DEFAULT_REGION=$AWS_REGION
+    - POSTGRES_USER=postgres
+    # POSTGRES_PASSWORD=
+    - secure: "SOME_SECRET"
+    - IN_PGUSER=networksexample
+    # IN_PGPASSWORD=
+    - secure: "SOME_SECRET"
+    - PGUSER=networksexample
+    # PGPASSWORD=
+    - secure: "SOME_SECRET"
+    # IN_LOGGLY_TOKEN=
+    - secure: "SOME_SECRET"
+    - ARTIFACTS_BUCKET=halorium.networks-example
+    - ARTIFACTS_KEY=$AWS_ACCESS_KEY_ID
+    - ARTIFACTS_SECRET=$AWS_SECRET_ACCESS_KEY
+    - ARTIFACTS_PATH=artifacts
+    - ARTIFACTS_REGION=$AWS_REGION
+    - IN_CI=true
+    # IN_JWT_SIGNING_KEY
+    - secure: "SOME_SECRET"
+    # IN_SYSDIG_TOKEN
+    - secure: "SOME_SECRET"
+install:
+  - travis-ci/install
+before_script:
+  - # TODO acquire branch lock
+  - source certbot-env/bin/activate && tls/manage-files
+script:
+  - ./crank && travis-ci/deploy
+after_script:
+  - travis-ci/uninstall
+  - # TODO release branch lock
+notifications:
+  email: false

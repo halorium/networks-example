@@ -1,0 +1,3 @@
+#!/bin/bash
+
+go version | cut -c 14-19

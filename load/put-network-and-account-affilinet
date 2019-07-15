@@ -1,0 +1,37 @@
+#!/bin/bash
+
+HOST=$1
+
+# Create Network
+curl $HOST/networks/3                    \
+     -X PUT                              \
+     -H "Content-Type: application/json" \
+     -i                                  \
+     -d                                  \
+'{
+  "name": "Affilinet",
+  "variant": "affilinet",
+  "variations": {
+    "api-host": "https://api.affili.net",
+    "days-per-request": "45",
+    "days-to-load": "45",
+    "rate-interval": "10s",
+    "rate-quantity": "1"
+  }
+}'
+
+# Create Network Account
+curl $HOST/networks/3/accounts/20        \
+     -X PUT                              \
+     -H "Content-Type: application/json" \
+     -i                                  \
+     -d                                  \
+'{
+  "name": "Affilinet - UK",
+  "variant": "affilinet",
+  "variations": {
+    "currency": "GBP",
+    "password": "password",
+    "username": "123456"
+  }
+}'

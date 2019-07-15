@@ -1,0 +1,12 @@
+#!/bin/bash
+
+>&2 echo validating root stack template...
+
+OUTPUT=$(
+    aws                                                                 \
+      cloudformation                                                    \
+        validate-template                                               \
+          --template-body file://aws/root-stack-template/root.json 2>&1 || exit 1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

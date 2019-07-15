@@ -1,0 +1,65 @@
+> GET http://roles-api/roles/admin HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 301da05435e040e18fde79442c88f7529b7d94dba68b413bcdda756ef6aa2fa0
+< In-Role-Id: admin
+<
+< {
+<   "name": "Administrator",
+<   "description": "This has all actions",
+<   "actions": [
+<     "*:*"
+<   ]
+< }
+
+> GET http://roles-api/roles/identity HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 69b722351c3cca1478994f43dbf73e0b907137c9d9cd8aea59563b48112effd9
+< In-Role-Id: identity
+<
+< {
+<   "name": "Identity",
+<   "description": "Manage your own identity",
+<   "actions": [
+<     "put,get:/identities/@"
+<   ]
+< }
+
+> GET http://roles-api/roles/detailed HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 7eac1172051f99c1b829ed1d0930a58c12d1f30b31828b95a4d016640de057de
+< In-Role-Id: detailed
+<
+< {
+<   "name": "Detailed",
+<   "description": "This has detailed actions",
+<   "actions": [
+<     "put,get:networks/*/"
+<   ]
+< }
+
+> GET http://roles-api/roles/invalid HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

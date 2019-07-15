@@ -1,0 +1,13 @@
+#!/bin/bash
+
+>&2 echo putting tls files into s3...
+
+OUTPUT=$(
+  aws                                                    \
+    s3                                                   \
+      sync                                               \
+        tls/files                                        \
+        s3://halorium.networks-example/tls/files || exit 1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

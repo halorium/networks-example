@@ -1,0 +1,13 @@
+{{{define "instance-profile"}}}
+"InstanceProfile": {
+  "Type": "AWS::IAM::InstanceProfile",
+  "Properties": {
+    "Path": "/",
+    "Roles": [
+      {
+        "Ref": "InstanceRole"
+      }
+    ]
+  }
+}
+{{{end}}}

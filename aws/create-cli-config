@@ -1,0 +1,13 @@
+#!/bin/bash
+
+mkdir ~/.aws
+
+cat > ~/.aws/config <<AWS_CONFIG
+[default]
+aws_access_key_id=$AWS_ACCESS_KEY_ID
+aws_secret_access_key=$AWS_SECRET_ACCESS_KEY
+
+[profile dns]
+role_arn=arn:aws:iam::389596288876:role/TravisCICrossAccount
+source_profile=default
+AWS_CONFIG

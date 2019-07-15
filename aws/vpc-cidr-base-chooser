@@ -1,0 +1,25 @@
+#!/bin/bash
+
+VPCS=$(
+  aws                                   \
+    --output json                       \
+      ec2 describe-vpcs               | \
+  jq --raw-output '.Vpcs[].CidrBlock'
+)
+
+for THIRD_BYTE in $(seq 0 4 252);
+do
+  IN_VPC_CIDR_BASE=192.168.$THIRD_BYTE
+
+  VPC_CIDR_MATCH=$(
+    echo "$VPCS" | grep $IN_VPC_CIDR_BASE
+  )
+
+  [[ "$VPC_CIDR_MATCH" = "" ]] && break
+
+  >&2 echo $IN_VPC_CIDR_BASE is already in use...
+done || exit 1
+
+echo $IN_VPC_CIDR_BASE
+
+exit 0

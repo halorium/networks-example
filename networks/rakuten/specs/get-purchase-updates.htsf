@@ -1,0 +1,89 @@
+> GET http://networks-api/networks/15/accounts/19/purchase-updates?created-at=⧈YYYY-MM-DD⧈ HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "64b2cb743eae638e063e192a5d7864355e4d8c15f2b0bf9fe3bb82fba8ed2022",
+<       "network-account-id": "19",
+<       "network-id": "15",
+<       "purchase-id": "3D95FAD6364ED641E53BFD1321AEFCEB",
+<       "variation-version": "8c5401b8fd9cf06384db7c5f9055f1024e633d751fa7505ac518dd74b664ab91"
+<     },
+<     "body": {
+<       "click-id": "t592290327m",
+<       "commission-amount": "0.5",
+<       "currency": "GBP",
+<       "date": "2016-10-11T06:29:00.000000Z",
+<       "order-id": "34221822",
+<       "sale-amount": "10",
+<       "status": "OPEN",
+<       "variant": "rakuten",
+<       "variations": {
+<         "adjusted-commission": "0",
+<         "baseline-commission": "0.5",
+<         "match-date": "2016-Oct-11",
+<         "match-time": "0701",
+<         "member-id": "t592290327m",
+<         "merchant-partner-id": "38432",
+<         "merchant-partner-name": "River Island",
+<         "order-id": "34221822",
+<         "process-due-date": "2016-Oct-11",
+<         "process-due-time": "0629",
+<         "product-name": "Bronze metallic deep plunge bodysuit",
+<         "product-sku-number": "5178643",
+<         "quantity": "1",
+<         "sales-amount": "10",
+<         "total-commission": "0.5",
+<         "transaction-date": "2016-Oct-11",
+<         "transaction-id": "3D95FAD6364ED641E53BFD1321AEFCEB",
+<         "transaction-time": "0629"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "ade3986ed6795bdd56bae1b01d643a426ba67974cc7b131c7f16d4a4c4040580",
+<       "network-account-id": "19",
+<       "network-id": "15",
+<       "purchase-id": "C87AB00BDB8D169D3EC626157179242A",
+<       "variation-version": "dbd904f766f264da5b36241081f46ba63ea3fb1a8fdcac216a92df97b4142b10"
+<     },
+<     "body": {
+<       "click-id": "t592553713m",
+<       "commission-amount": "0.9565",
+<       "currency": "GBP",
+<       "date": "2016-10-09T21:12:00.000000Z",
+<       "order-id": "25900575",
+<       "sale-amount": "19.13",
+<       "status": "OPEN",
+<       "variant": "rakuten",
+<       "variations": {
+<         "adjusted-commission": "0",
+<         "baseline-commission": "0.9565",
+<         "match-date": "2016-Oct-11",
+<         "match-time": "0846",
+<         "member-id": "t592553713m",
+<         "merchant-partner-id": "36027",
+<         "merchant-partner-name": "Notonthehighstreet.com",
+<         "order-id": "25900575",
+<         "process-due-date": "2016-Oct-11",
+<         "process-due-time": "0841",
+<         "product-name": "Ready Set Bake Personalised Apron",
+<         "product-sku-number": "617092",
+<         "quantity": "1",
+<         "sales-amount": "19.13",
+<         "total-commission": "0.9565",
+<         "transaction-date": "2016-Oct-09",
+<         "transaction-id": "C87AB00BDB8D169D3EC626157179242A",
+<         "transaction-time": "2112"
+<       }
+<     }
+<   }
+< ]

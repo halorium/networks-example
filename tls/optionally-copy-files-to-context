@@ -1,0 +1,20 @@
+#!/bin/bash
+
+REPOSITORY_ROOT=$1
+PACKAGE_PATH=$2
+
+echo "optionally-copy-files-to-context: $PACKAGE_PATH"
+
+if [[ "$PACKAGE_PATH" = */api ]] || [[ "$PACKAGE_PATH" = */worker ]]; then
+  mkdir -p tls/files                                              || exit 1
+
+  if [[ -d $REPOSITORY_ROOT/tls/files ]]; then
+   cp $REPOSITORY_ROOT/tls/files/certificate-chain.pem tls/files/ || exit 1
+   cp $REPOSITORY_ROOT/tls/files/private-key.pem       tls/files/ || exit 1
+  else
+   touch tls/files/certificate-chain.pem                          || exit 1
+   touch tls/files/private-key.pem                                || exit 1
+  fi
+fi
+
+exit 0

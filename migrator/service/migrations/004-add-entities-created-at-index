@@ -1,0 +1,5 @@
+#!/bin/bash
+
+OUTPUT=$(
+2>&1 psql -c "CREATE INDEX created_at_index ON entities (created_at);"
+) || (echo "$OUTPUT" && exit 1) || exit 1

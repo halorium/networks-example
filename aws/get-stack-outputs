@@ -1,0 +1,10 @@
+#!/bin/bash
+
+aws                                    \
+  --output json                        \
+  cloudformation                       \
+    describe-stacks                    \
+      --stack-name $IN_GIT_BRANCH    | \
+jq --raw-output '.Stacks[0].Outputs' || exit 1
+
+exit 0

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+>&2 echo pruning local containers...
+
+(
+  docker ps -a      | \
+  grep -v CONTAINER | \
+  grep -v Up        | \
+  awk '{print $1}'  | \
+  compatibility/xargs docker rm &> /dev/null || exit 1
+) || exit 1
+
+exit 0

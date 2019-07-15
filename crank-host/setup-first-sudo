@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# to be used on AWS m4.large instance running Amazon Linux
+
+yum update -y                                                                   || exit 1
+yum install -y docker git                                                       || exit 1
+yum groupinstall -y "Development Tools"                                         || exit 1
+
+DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m`
+
+curl -L $DOCKER_COMPOSE_URL > /usr/local/bin/docker-compose                     || exit 1
+chmod 755 /usr/local/bin/docker-compose                                         || exit 1
+
+rm -rf /var/lib/docker                                                          || exit 1
+mkdir -p /var/lib/docker                                                        || exit 1
+chmod g+r,o+r /var/lib/docker                                                   || exit 1
+
+cat <<EOF > fstab                                                               || exit 1
+LABEL=/ /                 ext4   defaults,noatime   1 1
+tmpfs   /dev/shm          tmpfs  defaults           0 0
+devpts  /dev/pts          devpts gid=5,mode=620     0 0
+sysfs   /sys              sysfs  defaults           0 0
+proc    /proc             proc   defaults           0 0
+gopath  /home/ec2-user/go tmpfs  size=1G,noatime,rw 0 0
+docker  /var/lib/docker   tmpfs  size=4G,noatime,rw 0 0
+EOF
+
+mv fstab /etc/fstab                                                             || exit 1
+
+mkdir /home/ec2-user/go                                                         || exit 1
+chown ec2-user:ec2-user /home/ec2-user/go                                       || exit 1
+
+mount -a                                                                        || exit 1
+
+service docker start                                                            || exit 1
+
+usermod -aG docker ec2-user                                                     || exit 1
+
+ln -s /etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt           || exit 1
+
+exit 0

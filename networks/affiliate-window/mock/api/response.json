@@ -1,0 +1,149 @@
+[
+  {
+    "advertiserCountry": "GB",
+    "advertiserId": 5678,
+    "amendReason": "Part Returned",
+    "amended": true,
+    "clickDate": "2017-04-07T22:12:00",
+    "clickDevice": "Apple Mac",
+    "clickRefs": {
+      "clickRef": "t594514235m"
+    },
+    "commissionAmount": {
+      "amount": 0.4,
+      "currency": "GBP"
+    },
+    "commissionSharingPublisherId": null,
+    "commissionStatus": "approved",
+    "customParameters": null,
+    "declineReason": null,
+    "id": 272955205,
+    "lapseTime": 66514,
+    "oldCommissionAmount": {
+      "amount": 0.96,
+      "currency": "GBP"
+    },
+    "oldSaleAmount": {
+      "amount": 32.08,
+      "currency": "GBP"
+    },
+    "orderRef": null,
+    "originalSaleAmount": null,
+    "paidToPublisher": false,
+    "paymentId": 0,
+    "publisherId": 68727,
+    "publisherUrl": "http://cashback.completesavings.co.uk/info/83484/15356/asos/afsrc=1",
+    "saleAmount": {
+      "amount": 13.33,
+      "currency": "GBP"
+    },
+    "siteName": "Incentive Networks",
+    "transactionDate": "2017-01-01T16:40:00",
+    "transactionDevice": "Apple Mac",
+    "transactionParts": [
+      {
+        "amount": 13.33,
+        "commissionGroupId": 64067
+      }
+    ],
+    "transactionQueryId": 0,
+    "type": "Commission group transaction",
+    "url": "http://www.networksexample.com",
+    "validationDate": "2017-05-31T16:10:00",
+    "voucherCodeUsed": true
+  },
+  {
+    "advertiserCountry": "GB",
+    "advertiserId": 1599,
+    "amendReason": null,
+    "amended": false,
+    "clickDate": "2017-05-01T18:18:00",
+    "clickDevice": "Android Tablet",
+    "clickRefs": {
+      "clickRef": "t594751301m"
+    },
+    "commissionAmount": {
+      "amount": 0.12,
+      "currency": "GBP"
+    },
+    "commissionSharingPublisherId": null,
+    "commissionStatus": "pending",
+    "customParameters": null,
+    "declineReason": null,
+    "id": 284216525,
+    "lapseTime": 325,
+    "oldCommissionAmount": null,
+    "oldSaleAmount": null,
+    "orderRef": null,
+    "originalSaleAmount": null,
+    "paidToPublisher": false,
+    "paymentId": 0,
+    "publisherId": 68727,
+    "publisherUrl": null,
+    "saleAmount": {
+      "amount": 8.32,
+      "currency": "GBP"
+    },
+    "siteName": "Incentive Networks",
+    "transactionDate": "2017-01-01T18:23:00",
+    "transactionDevice": "Android Tablet",
+    "transactionParts": [
+      {
+        "amount": 8.32,
+        "commissionGroupId": 5724
+      }
+    ],
+    "transactionQueryId": 0,
+    "type": "Commission group transaction",
+    "url": "http://www.networksexample.com",
+    "validationDate": null,
+    "voucherCodeUsed": false
+  },
+  {
+    "advertiserCountry": "GB",
+    "advertiserId": 1685,
+    "amendReason": null,
+    "amended": false,
+    "clickDate": "2017-05-01T09:03:00",
+    "clickDevice": "iPhone",
+    "clickRefs": {
+      "clickRef": "t594746521m"
+    },
+    "commissionAmount": {
+      "amount": 2.92,
+      "currency": "GBP"
+    },
+    "commissionSharingPublisherId": null,
+    "commissionStatus": "declined",
+    "customParameters": null,
+    "declineReason": "Order not complete - Customer returned order",
+    "id": 284101966,
+    "lapseTime": 167,
+    "oldCommissionAmount": null,
+    "oldSaleAmount": null,
+    "orderRef": null,
+    "originalSaleAmount": null,
+    "paidToPublisher": false,
+    "paymentId": 0,
+    "publisherId": 68727,
+    "publisherUrl": "http://cashback.completesavings.co.uk/info/82267/4774/m-co/afsrc=1",
+    "saleAmount": {
+      "amount": 58.4,
+      "currency": "GBP"
+    },
+    "siteName": "Incentive Networks",
+    "transactionDate": "2017-01-01T09:06:00",
+    "transactionDevice": "iPhone",
+    "transactionParts": [
+      {
+        "amount": 58.4,
+        "commissionGroupId": 6910
+      }
+    ],
+    "transactionQueryId": 0,
+    "type": "Commission group transaction",
+    "url": "http://www.networksexample.com",
+    "validationDate": "2017-06-01T14:58:00",
+    "voucherCodeUsed": false
+  }
+]

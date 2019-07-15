@@ -1,0 +1,5 @@
+#!/bin/bash
+
+TZ=UTC date +%Y-%m-%d || exit 1
+
+exit 0

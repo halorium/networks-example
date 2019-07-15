@@ -1,0 +1,5 @@
+version: '2'
+services:
+  networks-booking-mock-api:
+    image: networks-example/networks-booking-mock-api
+    read_only: true

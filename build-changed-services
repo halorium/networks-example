@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker/list-mock-services               | \
+while read service; do
+  docker/build-changed-service $service || exit 1
+done || exit 1
+
+docker/list-services                    | \
+while read service; do
+  docker/build-changed-service $service || exit 1
+done || exit 1
+
+exit 0

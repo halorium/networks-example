@@ -1,0 +1,171 @@
+> PUT http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+> {
+>   "name": "Rakuten - United Kingdom",
+>   "variant": "rakuten",
+>   "variations": {
+>     "currency": "GBP",
+>     "password": "password",
+>     "username": "username"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: e0bd1ac3db588c935e17b300bad6dfb7f71086c14f51ec471d3376a78e8ddd31
+< In-Network-Account-Id: 456
+< In-Network-Id: 123
+< In-Variation-Version: ebf104edc4dfe960d52b4727ad4dc37a50ed46eb96dbb8b590edfe80f29f8a1b
+<
+< {
+<   "name": "Rakuten - United Kingdom",
+<   "variant": "rakuten",
+<   "variations": {
+<     "currency": "GBP",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> PUT http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+> {
+>   "name": "Rakuten - UK",
+>   "variant": "rakuten",
+>   "variations": {
+>     "currency": "GBP",
+>     "password": "password",
+>     "username": "username"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 03e1b663b2043893813c16c3ffffb2a546a6de647a82f752ebb4528fc5b0bb2f
+< In-Network-Account-Id: 456
+< In-Network-Id: 123
+< In-Variation-Version: ebf104edc4dfe960d52b4727ad4dc37a50ed46eb96dbb8b590edfe80f29f8a1b
+<
+< {
+<   "name": "Rakuten - UK",
+<   "variant": "rakuten",
+<   "variations": {
+<     "currency": "GBP",
+<     "password": "password",
+<     "username": "username"
+<   }
+< }
+
+> PUT http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+> {
+>   "variant": "rakuten"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "name is required"
+<     },
+<     {
+<       "error": "variations.currency is required"
+<     }
+<   ]
+< }
+
+> PUT http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+> {
+>   "name": "Rakuten"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "variant is required"
+<     },
+<     {
+<       "error": "variations.currency is required"
+<     }
+<   ]
+< }
+
+> PUT http://networks-api/networks/invalid/accounts/13 HTTP/1.1
+>
+> {
+>   "name": "Rakuten",
+>   "variant": "rakuten",
+>   "variations": {
+>     "currency": "GBP",
+>     "password": "password",
+>     "username": "username"
+>   }
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "invalid network-id"
+<     }
+<   ]
+< }
+
+> PUT http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+> {}
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "name is required"
+<     },
+<     {
+<       "error": "variant is required"
+<     },
+<     {
+<       "error": "variations.currency is required"
+<     }
+<   ]
+< }
+
+> PUT http://networks-api/networks/123/accounts/456 HTTP/1.1
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "malformed body"
+<     }
+<   ]
+< }

@@ -1,0 +1,5 @@
+version: '2'
+services:
+  roles-api:
+    image: networks-example/roles-api
+    read_only: true

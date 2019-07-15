@@ -1,0 +1,16 @@
+Local:
+  Host: localhost
+  Port: 4100
+  LogMessages: false
+  Queues:
+    - Name: local-post-network-account-purchases-load
+    - Name: local-put-purchase-in-postgres
+  Topics:
+    - Name: local-post-network-account-purchases-load
+      Subscriptions:
+        - QueueName: local-post-network-account-purchases-load
+          Raw: false
+    - Name: local-put-network-account-purchase
+      Subscriptions:
+        - QueueName: local-put-purchase-in-postgres
+          Raw: false

@@ -1,0 +1,15 @@
+> DELETE http://networks-api/networks/123/accounts HTTP/1.1
+>
+
+< HTTP/1.1 409 Conflict
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "network-account has network-account-purchases"
+<     }
+<   ]
+< }

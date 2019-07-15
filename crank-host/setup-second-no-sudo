@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# to be used on AWS m4.large instance running Amazon Linux
+
+curl -L https://storage.googleapis.com/golang/go$(go/desired-version).linux-amd64.tar.gz | \
+tar -xz -C ~/go                                                          || exit 1
+
+mkdir -p ~/go/bin ~/go/pkg ~/go/src || exit 1
+chown -R ec2-user:ec2-user ~/go/*                                        || exit 1
+
+cat <<EOF >> .bashrc                                                       || exit 1
+export PATH=$PATH:~/go/bin:~/go/go/bin
+export GOROOT=~/go/go
+EOF
+
+mkdir -p ~/go/src/github.com/halorium/networks-example             || exit 1

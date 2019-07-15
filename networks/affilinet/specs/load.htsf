@@ -1,0 +1,83 @@
+> PUT http://networks-api/networks/3 HTTP/1.1
+>
+> {
+>   "name": "Affilinet",
+>   "variant": "affilinet",
+>   "variations": {
+>     "api-host": "http://networks-affilinet-mock-api",
+>     "days-per-request": "45",
+>     "days-to-load": "45",
+>     "rate-interval": "10s",
+>     "rate-quantity": "1"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 05ecd41d69769d54f0cc844dc982b509e10e478363bf9b26128830d99928ac63
+< In-Network-Id: 3
+< In-Variation-Version: 8f176e143ce3532597c392d020117371a0cb75853771f216d957b8a010f51611
+<
+< {
+<   "name": "Affilinet",
+<   "variant": "affilinet",
+<   "variations": {
+<     "api-host": "http://networks-affilinet-mock-api",
+<     "days-per-request": "45",
+<     "days-to-load": "45",
+<     "rate-interval": "10s",
+<     "rate-quantity": "1"
+<   }
+< }
+
+> PUT http://networks-api/networks/3/accounts/20 HTTP/1.1
+>
+> {
+>   "name": "Affilinet - UK",
+>   "variant": "affilinet",
+>   "variations": {
+>     "currency": "GBP",
+>     "password": "123456",
+>     "username": "123456"
+>   }
+> }
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 6020413837af66effb8fff3b7e14bad20652a2d5550613423cfadec85615a582
+< In-Network-Account-Id: 20
+< In-Network-Id: 3
+< In-Variation-Version: 23f06f0d6a1adb424e2ed303dd30a7ece5be5de48bd628aee5f600cc54d6bfb9
+<
+< {
+<   "name": "Affilinet - UK",
+<   "variant": "affilinet",
+<   "variations": {
+<     "currency": "GBP",
+<     "password": "123456",
+<     "username": "123456"
+<   }
+< }
+
+> POST http://networks-api/networks/3/accounts/20/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-01T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 202 Accepted
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "start-time": "2017-01-01T00:00:00.000000Z",
+<   "stop-time": "2017-01-01T23:59:59.999999Z"
+< }

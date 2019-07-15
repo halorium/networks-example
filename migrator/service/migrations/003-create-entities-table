@@ -1,0 +1,11 @@
+#!/bin/bash
+
+OUTPUT=$(
+2>&1 psql -c "CREATE TABLE entities (
+prefix varchar NOT NULL,
+id varchar NOT NULL,
+etag varchar NOT NULL,
+created_at timestamp NOT NULL,
+entity jsonb NOT NULL,
+PRIMARY KEY (prefix, id, etag));"
+) || (echo "$OUTPUT" && exit 1) || exit 1

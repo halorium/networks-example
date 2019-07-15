@@ -1,0 +1,13 @@
+#!/bin/bash
+
+OUTPUT=$(
+2>&1 psql -c "CREATE USER $IN_PGUSER;"
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+OUTPUT=$(
+2>&1 psql -c "ALTER USER $IN_PGUSER WITH PASSWORD '$IN_PGPASSWORD';"
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+OUTPUT=$(
+2>&1 psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO $IN_PGUSER;"
+) || (echo "$OUTPUT" && exit 1) || exit 1

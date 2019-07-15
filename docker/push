@@ -1,0 +1,28 @@
+#!/bin/bash
+
+>&2 echo pushing images...
+
+{
+  docker/list-services;
+  echo migrator-service;
+}                                                  | \
+compatibility/xargs -n 1 docker/hyphenate-pathname | \
+while read service; do
+  >&2 echo "  $service..."
+
+  OUTPUT1=$(
+    LOCATION=$IN_DOCKER_REGISTRY/$IN_GIT_BRANCH-$service:$IN_GIT_SHA || exit 1
+    OUTPUT2=$(
+      docker                          \
+        tag                           \
+          networks-example/$service \
+            $LOCATION 2>&1            || exit 1
+
+      docker                          \
+        push                          \
+          $LOCATION 2>&1              || exit 1
+    ) || (echo "$OUTPUT2" && exit 1) || exit 1
+  ) || (echo "$OUTPUT1" && exit 1) || exit 1
+done || exit 1
+
+exit 0

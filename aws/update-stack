@@ -1,0 +1,31 @@
+#!/bin/bash
+
+>&2 echo attempting to update stack...
+
+OUTPUT=$(
+  aws                                                                                                                 \
+    cloudformation                                                                                                    \
+      update-stack                                                                                                    \
+        --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM                                                            \
+        --stack-name $IN_GIT_BRANCH                                                                                   \
+        --template-url https://s3.amazonaws.com/halorium.networks-example/$IN_GIT_BRANCH/$IN_GIT_SHA.template \
+        --parameters                                                                                                  \
+          ParameterKey=InGitBranch,ParameterValue=$IN_GIT_BRANCH                                                      \
+          ParameterKey=InDockerRegistry,ParameterValue=$IN_DOCKER_REGISTRY                                            \
+          ParameterKey=InGitSha,ParameterValue=$IN_GIT_SHA                                                            \
+          ParameterKey=InJwtSigningKey,ParameterValue=$IN_JWT_SIGNING_KEY                                             \
+          ParameterKey=InLogglyToken,ParameterValue=$IN_LOGGLY_TOKEN                                                  \
+          ParameterKey=InSysdigToken,ParameterValue=$IN_SYSDIG_TOKEN                                                  \
+          ParameterKey=PgUser,ParameterValue=$PGUSER                                                                  \
+          ParameterKey=PgPassword,ParameterValue=$PGPASSWORD                                                          \
+          ParameterKey=PostgresUser,ParameterValue=$POSTGRES_USER                                                     \
+          ParameterKey=PostgresPassword,ParameterValue=$POSTGRES_PASSWORD                                             \
+          ParameterKey=InPgUser,ParameterValue=$IN_PGUSER                                                             \
+          ParameterKey=InPgPassword,ParameterValue=$IN_PGPASSWORD                                                     \
+          ParameterKey=InSftpKey,ParameterValue="$IN_SFTP_KEY"                                                        \
+          ParameterKey=InSubnetCidrBlocks,ParameterValue=\"$IN_SUBNET_CIDR_BLOCKS\"                                   \
+          ParameterKey=InTlsCertificateArn,ParameterValue=$(aws/acm-certificate-arn-most-recent)                      \
+          ParameterKey=InVpcCidrBase,ParameterValue=$IN_VPC_CIDR_BASE 2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

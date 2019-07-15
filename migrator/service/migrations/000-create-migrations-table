@@ -1,0 +1,10 @@
+#!/bin/bash
+
+OUTPUT=$(
+2>&1 psql -c "CREATE TABLE IF NOT EXISTS migrations (
+  id varchar NOT NULL,
+  filename varchar NOT NULL,
+  created_at timestamp NOT NULL,
+  PRIMARY KEY (id)
+);"
+) || (echo "$OUTPUT" && exit 1) || exit 1

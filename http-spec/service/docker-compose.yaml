@@ -1,0 +1,5 @@
+version: '2'
+services:
+  http-spec-service:
+    image: networks-example/http-spec-service
+    read_only: true

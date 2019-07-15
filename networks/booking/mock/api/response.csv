@@ -1,0 +1,4 @@
+"book nr.",booked,arrival,departure,"comission ( EUR )",perc,"fee ( EUR )","slip nr.","affiliate id","hotel name","accomodation type","hotel country","hotel city","hotel ufi","booker country","booker language",label
+1060471607,"2017-01-01 16:59:51",2017-01-02,2017-01-03,17.82,35,6.24,hsnl007162,334402,"Hotel Touring",Hotel,Italy,Pisa,-124918,France,French,t593568399m
+1463241658,"2017-01-02 11:35:41",2017-01-04,2017-01-05,7.15,35,2.50,hsnl007162,334402,"Kyriad Dax St-Paul-Les-Dax",Hotel,France,Saint-Paul-lès-Dax,-1467816,France,French,t593574825m
+1334716491,"2017-01-04 14:28:54",2017-03-06,2017-03-08,0.00,35,0.00,-,334402,"Hôtel Saint James",Hotel,France,Biarritz,-1412526,France,French,t593598821m

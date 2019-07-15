@@ -1,0 +1,5 @@
+#!/bin/bash
+
+OUTPUT=$(
+2>&1 psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT DELETE ON TABLES TO $IN_PGUSER;"
+) || (echo "$OUTPUT" && exit 1) || exit 1

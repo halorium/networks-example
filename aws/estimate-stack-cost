@@ -1,0 +1,34 @@
+#!/bin/bash
+
+>&2 echo estimating stack template cost...
+
+aws/render-stack-template                      || exit 1
+aws/put-stack-template-in-s3                   || exit 1
+
+aws                                                                                                                 \
+  cloudformation                                                                                                    \
+    estimate-template-cost                                                                                          \
+      --template-url https://s3.amazonaws.com/halorium.networks-example/$IN_GIT_BRANCH/$IN_GIT_SHA.template \
+      --parameters                                                                                                  \
+        ParameterKey=InGitBranch,ParameterValue=$IN_GIT_BRANCH                                                      \
+        ParameterKey=InDockerRegistry,ParameterValue=$IN_DOCKER_REGISTRY                                            \
+        ParameterKey=InGitSha,ParameterValue=$IN_GIT_SHA                                                            \
+        ParameterKey=InJwtSigningKey,ParameterValue=$IN_JWT_SIGNING_KEY                                             \
+        ParameterKey=InLogglyToken,ParameterValue=$IN_LOGGLY_TOKEN                                                  \
+        ParameterKey=InSysdigToken,ParameterValue=$IN_SYSDIG_TOKEN                                                  \
+        ParameterKey=PgUser,ParameterValue=$PGUSER                                                                  \
+        ParameterKey=PgPassword,ParameterValue=$PGPASSWORD                                                          \
+        ParameterKey=PostgresUser,ParameterValue=$POSTGRES_USER                                                     \
+        ParameterKey=PostgresPassword,ParameterValue=$POSTGRES_PASSWORD                                             \
+        ParameterKey=InPgUser,ParameterValue=$IN_PGUSER                                                             \
+        ParameterKey=InPgPassword,ParameterValue=$IN_PGPASSWORD                                                     \
+        ParameterKey=InSftpKey,ParameterValue="$IN_SFTP_KEY"                                                        \
+        ParameterKey=InSubnetCidrBlocks,ParameterValue=\"$IN_SUBNET_CIDR_BLOCKS\"                                   \
+        ParameterKey=InTlsCertificateArn,ParameterValue=$(aws/acm-certificate-arn-most-recent)                      \
+        ParameterKey=InVpcCidrBase,ParameterValue=$IN_VPC_CIDR_BASE                                                 \
+> $IN_ARTIFACTS_PATH/$IN_GIT_BRANCH.estimate   || exit 1
+
+cat $IN_ARTIFACTS_PATH/$IN_GIT_BRANCH.estimate | \
+jq --raw-output '.Url' 1>&2                    || exit 1
+
+exit 0

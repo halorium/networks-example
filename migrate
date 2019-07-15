@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo migrating...
+
+export IN_GIT_SHA=$(git/current-sha)
+
+OUTPUT=$(
+  docker-compose run migrator-service 2>&1
+) || (echo "$OUTPUT" && exit 1) || exit 1
+
+exit 0

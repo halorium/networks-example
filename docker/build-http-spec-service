@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SERVICE_PATH=http-spec/service
+SERVICE_NAME=$(docker/hyphenate-pathname $SERVICE_PATH)                            || exit 1
+
+IMAGE=$(docker images | grep $SERVICE_NAME)
+MODIFIED=$(git status -s | grep htsf)
+
+if [[ "$IMAGE" != "" ]] && [[ "$MODIFIED" == "" ]]; then
+  >&2 echo skip building $SERVICE_NAME...
+  exit 0
+fi
+
+REPOSITORY_ROOT=$(pwd)
+
+for SPEC_DIR in $(find . -name specs -type d); do
+  mkdir -p $SERVICE_PATH/$SPEC_DIR                                               || exit 1
+  cp -r $REPOSITORY_ROOT/$SPEC_DIR/* $SERVICE_PATH/$SPEC_DIR/                    || exit 1
+done || exit 1
+
+docker/build-service $SERVICE_PATH                                               || exit 1
+
+find http-spec/service -maxdepth 1 -not -name service -type d -exec rm -rf {} \; || exit 1
+
+exit 0

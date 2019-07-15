@@ -1,0 +1,78 @@
+{{{define "outputs"}}}
+"LoadBalancerHostname": {
+  "Description": "load balancer hostname",
+  "Value": {
+    "Fn::GetAtt": [
+      "LoadBalancer",
+      "DNSName"
+    ]
+  }
+},
+"InSubnetCidrBlock0": {
+  "Description": "subnet CIDR block 0",
+  "Value": {
+    "Fn::Select": [
+      "0",
+      {
+        "Ref": "InSubnetCidrBlocks"
+      }
+    ]
+  }
+},
+"InSubnetCidrBlock1": {
+  "Description": "subnet CIDR block 1",
+  "Value": {
+    "Fn::Select": [
+      "1",
+      {
+        "Ref": "InSubnetCidrBlocks"
+      }
+    ]
+  }
+},
+"InSubnetCidrBlock2": {
+  "Description": "subnet CIDR block 2",
+  "Value": {
+    "Fn::Select": [
+      "2",
+      {
+        "Ref": "InSubnetCidrBlocks"
+      }
+    ]
+  }
+},
+"InSubnetCidrBlock3": {
+  "Description": "subnet CIDR block 3",
+  "Value": {
+    "Fn::Select": [
+      "3",
+      {
+        "Ref": "InSubnetCidrBlocks"
+      }
+    ]
+  }
+},
+"PostgresHostname": {
+  "Description": "postgres hostname",
+  "Value": {
+    "Fn::Join": [
+      "",
+      [
+        {
+          "Fn::GetAtt": [
+            "Postgres",
+            "Endpoint.Address"
+          ]
+        },
+        ":",
+        {
+          "Fn::GetAtt": [
+            "Postgres",
+            "Endpoint.Port"
+          ]
+        }
+      ]
+    ]
+  }
+}
+{{{end}}}

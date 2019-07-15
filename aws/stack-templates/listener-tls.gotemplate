@@ -1,0 +1,27 @@
+{{{define "listener-tls"}}}
+"ListenerTls": {
+  "Type": "AWS::ElasticLoadBalancingV2::Listener",
+  "Properties": {
+    "Certificates": [
+      {
+        "CertificateArn": {
+          "Ref": "InTlsCertificateArn"
+        }
+      }
+    ],
+    "DefaultActions": [
+      {
+        "Type": "forward",
+        "TargetGroupArn": {
+          "Ref": "StatusApiTargetGroup"
+        }
+      }
+    ],
+    "LoadBalancerArn": {
+      "Ref": "LoadBalancer"
+    },
+    "Port": "443",
+    "Protocol": "HTTPS"
+  }
+}
+{{{end}}}

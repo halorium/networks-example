@@ -1,0 +1,39 @@
+{{{define "post-network-account-purchases-load-topic-policy"}}}
+"PostNetworkAccountPurchasesLoadTopicPolicy": {
+  "DependsOn": [
+    "PostNetworkAccountPurchasesLoadTopic"
+  ],
+  "Type": "AWS::SNS::TopicPolicy",
+  "Properties": {
+    "PolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": [
+              {
+                "Fn::GetAtt": [
+                  "TaskRole",
+                  "Arn"
+                ]
+              }
+            ]
+          },
+          "Action": [
+            "sns:Publish"
+          ],
+          "Resource": {
+            "Ref": "PostNetworkAccountPurchasesLoadTopic"
+          }
+        }
+      ]
+    },
+    "Topics": [
+      {
+        "Ref": "PostNetworkAccountPurchasesLoadTopic"
+      }
+    ]
+  }
+}
+{{{end}}}

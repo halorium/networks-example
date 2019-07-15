@@ -1,0 +1,223 @@
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.1@email.com",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 201 Created
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 5c7c2fd33e472c1a5ed7907f03f331f4684183cdc673c0bc0767a05e709ab2dd
+< In-Identity-Id: ⧆identity-id⧆:b62:22⧆
+< In-Variation-Version: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+<
+< {
+<   "name": "John Doe",
+<   "email": "john.doe.1@email.com",
+<   "variant": "password",
+<   "variations": {}
+< }
+
+> GET http://identities-api/identities/⧈identity-id⧈ HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 5c7c2fd33e472c1a5ed7907f03f331f4684183cdc673c0bc0767a05e709ab2dd
+< In-Identity-Id: ⧈identity-id⧈
+< In-Variation-Version: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+<
+< {
+<   "name": "John Doe",
+<   "email": "john.doe.1@email.com",
+<   "variant": "password",
+<   "variations": {}
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.1@email.com",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 409 Conflict
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "email already exists"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "email": "john.doe.2@email.com",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "name is required"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "email is required"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.3@email.com",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "variant is required"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.4@email.com",
+>   "variant": "password"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "variations.password is required"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.5@email.com",
+>   "variant": "password",
+>   "variations": {}
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "variations.password is required"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+> {}
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "name is required"
+<     },
+<     {
+<       "error": "email is required"
+<     },
+<     {
+<       "error": "variant is required"
+<     },
+<     {
+<       "error": "variations.password is required"
+<     }
+<   ]
+< }
+
+> POST http://identities-api/identities HTTP/1.1
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "malformed body"
+<     }
+<   ]
+< }

@@ -1,0 +1,13 @@
+{{{define "vpc-gateway-attachment"}}}
+"VPCGatewayAttachment": {
+  "Type": "AWS::EC2::VPCGatewayAttachment",
+  "Properties": {
+    "VpcId": {
+      "Ref": "Vpc"
+    },
+    "InternetGatewayId": {
+      "Ref": "InternetGateway"
+    }
+  }
+}
+{{{end}}}

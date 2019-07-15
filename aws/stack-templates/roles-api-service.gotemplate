@@ -1,0 +1,40 @@
+{{{define "roles-api-service"}}}
+"RolesApiService": {
+  "DependsOn": [
+    "RolesApiListenerRule",
+    "RolesApiTargetGroup"
+  ],
+  "Type": "AWS::ECS::Service",
+  "Properties": {
+    "Cluster": {
+      "Ref": "Cluster"
+    },
+    "DeploymentConfiguration": {
+      "MaximumPercent": "200",
+      "MinimumHealthyPercent": "50"
+    },
+    "DesiredCount": 4,
+    "LoadBalancers": [
+      {
+        "ContainerName": "roles-api",
+        "ContainerPort": "443",
+        "TargetGroupArn": {
+          "Ref": "RolesApiTargetGroup"
+        }
+      }
+    ],
+    "PlacementStrategies": [
+      {
+        "Type": "spread",
+        "Field": "attribute:ecs.availability-zone"
+      }
+    ],
+    "Role": {
+      "Ref": "ServiceRole"
+    },
+    "TaskDefinition": {
+      "Ref": "RolesApiTask"
+    }
+  }
+}
+{{{end}}}

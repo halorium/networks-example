@@ -1,0 +1,71 @@
+{{{define "task-policy"}}}
+"TaskPolicy": {
+  "Type": "AWS::IAM::Policy",
+  "Properties": {
+    "PolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Resource": "*",
+          "Action": [
+            "es:ESHttpDelete",
+            "es:ESHttpGet",
+            "es:ESHttpHead",
+            "es:ESHttpPost",
+            "es:ESHttpPut",
+            "sns:ListTopics",
+            "sns:Publish",
+            "sqs:ChangeMessageVisibility",
+            "sqs:DeleteMessage",
+            "sqs:GetQueueUrl",
+            "sqs:ReceiveMessage"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Resource": [
+            "arn:aws:s3:::halorium.networks-example"
+          ],
+          "Action": [
+            "s3:ListBucket"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Resource": [
+            "arn:aws:s3:::halorium.networks-example/*"
+          ],
+          "Action": [
+            "s3:GetObject",
+            "s3:PutObject",
+            "s3:DeleteObject"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Resource": [
+            {
+              "Fn::GetAtt": [
+                "TaskRole",
+                "Arn"
+              ]
+            }
+          ],
+          "Action": [
+            "iam:PassRole"
+          ]
+        }
+      ]
+    },
+    "PolicyName": {
+      "Fn::Sub": "${AWS::StackName}-task"
+    },
+    "Roles": [
+      {
+        "Ref": "TaskRole"
+      }
+    ]
+  }
+}
+{{{end}}}

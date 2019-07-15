@@ -1,0 +1,32 @@
+> GET http://networks-api/networks/123 HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 8a332ecc69c93dfe9e562a6529d8f766d798dec7bcad62778a33c690693b2171
+< In-Network-Id: 123
+< In-Variation-Version: 5efb5d7fd85a58411d5ee26b3f89c3cd51264941ac37d82409f19934ef8b5eef
+<
+< {
+<   "name": "Rakuten",
+<   "variant": "rakuten",
+<   "variations": {
+<     "api-host": "sftp-server",
+<     "days-per-request": "1",
+<     "days-to-load": "45",
+<     "rate-interval": "10s",
+<     "rate-quantity": "1"
+<   }
+< }
+
+> GET http://networks-api/networks/invalid HTTP/1.1
+>
+
+< HTTP/1.1 404 Not Found
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<

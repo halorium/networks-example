@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo pruning service images...
+
+docker images                                                                       | \
+egrep "$(docker/list-services | compatibility/xargs -n1 docker/hyphenate-pathname)" | \
+awk '{print $3}'                                                                    | \
+compatibility/xargs                                                                   \
+docker rmi -f &> /dev/null                                                          || exit 1
+
+exit 0

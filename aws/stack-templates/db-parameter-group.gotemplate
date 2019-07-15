@@ -1,0 +1,12 @@
+{{{define "db-parameter-group"}}}
+"DBParameterGroup": {
+  "Type": "AWS::RDS::DBParameterGroup",
+  "Properties": {
+    "Description": "Force SSL mode",
+    "Family": "postgres9.6",
+    "Parameters": {
+      "rds.force_ssl": 1
+    }
+  }
+}
+{{{end}}}

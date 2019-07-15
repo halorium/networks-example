@@ -1,0 +1,21 @@
+{{{define "cycler-service-service"}}}
+"CyclerServiceService": {
+  "DependsOn": [
+    "NetworksApiService"
+  ],
+  "Type": "AWS::ECS::Service",
+  "Properties": {
+    "Cluster": {
+      "Ref": "Cluster"
+    },
+    "DeploymentConfiguration": {
+      "MaximumPercent": "200",
+      "MinimumHealthyPercent": "50"
+    },
+    "DesiredCount": 1,
+    "TaskDefinition": {
+      "Ref": "CyclerServiceTask"
+    }
+  }
+}
+{{{end}}}

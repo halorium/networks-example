@@ -1,0 +1,5 @@
+version: '2'
+services:
+  identities-api:
+    image: networks-example/identities-api
+    read_only: true

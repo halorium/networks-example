@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo /hostedzone/Z3MUC1IRCDYTEH
+
+exit 0

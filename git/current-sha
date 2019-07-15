@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git rev-parse HEAD || exit 1
+
+exit 0

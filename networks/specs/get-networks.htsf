@@ -1,0 +1,104 @@
+> GET http://networks-api/networks HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "8a332ecc69c93dfe9e562a6529d8f766d798dec7bcad62778a33c690693b2171",
+<       "network-id": "123",
+<       "variation-version": "5efb5d7fd85a58411d5ee26b3f89c3cd51264941ac37d82409f19934ef8b5eef"
+<     },
+<     "body": {
+<       "name": "Rakuten",
+<       "variant": "rakuten",
+<       "variations": {
+<         "api-host": "sftp-server",
+<         "days-per-request": "1",
+<         "days-to-load": "45",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "8a332ecc69c93dfe9e562a6529d8f766d798dec7bcad62778a33c690693b2171",
+<       "network-id": "15",
+<       "variation-version": "5efb5d7fd85a58411d5ee26b3f89c3cd51264941ac37d82409f19934ef8b5eef"
+<     },
+<     "body": {
+<       "name": "Rakuten",
+<       "variant": "rakuten",
+<       "variations": {
+<         "api-host": "sftp-server",
+<         "days-per-request": "1",
+<         "days-to-load": "45",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "117427a5a5389412127e92c76dcb41f1158283a00efc8547ac476ea679bca538",
+<       "network-id": "26",
+<       "variation-version": "9201a62eeeb2a81c765d3524c843bd64a3b78e9791f9c905714488420b609456"
+<     },
+<     "body": {
+<       "name": "Booking.com",
+<       "variant": "booking",
+<       "variations": {
+<         "api-host": "http://networks-booking-mock-api",
+<         "days-per-request": "1",
+<         "days-to-load": "45",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "05ecd41d69769d54f0cc844dc982b509e10e478363bf9b26128830d99928ac63",
+<       "network-id": "3",
+<       "variation-version": "8f176e143ce3532597c392d020117371a0cb75853771f216d957b8a010f51611"
+<     },
+<     "body": {
+<       "name": "Affilinet",
+<       "variant": "affilinet",
+<       "variations": {
+<         "api-host": "http://networks-affilinet-mock-api",
+<         "days-per-request": "45",
+<         "days-to-load": "45",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "c023c818808a589b9a842648597ac4699f7285a9b35abf5f4d37b71fc824b05b",
+<       "network-id": "6",
+<       "variation-version": "5a7a3bd24e6a7aff5244f10b96b179964cdee24de587436c7413a1cc8ea37fd3"
+<     },
+<     "body": {
+<       "name": "Affiliate Window",
+<       "variant": "affiliate-window",
+<       "variations": {
+<         "api-host": "http://networks-affiliate-window-mock-api",
+<         "days-per-request": "10",
+<         "days-to-load": "90",
+<         "rate-interval": "10s",
+<         "rate-quantity": "1"
+<       }
+<     }
+<   }
+< ]

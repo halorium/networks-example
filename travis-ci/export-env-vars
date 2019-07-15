@@ -1,0 +1,19 @@
+#!/bin/bash
+
+export IN_GIT_BRANCH=$TRAVIS_BRANCH
+export IN_GIT_SHA=$TRAVIS_COMMIT
+
+export IN_ARTIFACTS_PATH=$ARTIFACTS_PATH
+export IN_DOCKER_REGISTRY=943286310457.dkr.ecr.us-east-1.amazonaws.com
+export IN_ELB_CNAME=$IN_GIT_BRANCH.v1.networksexample.com
+export IN_LOG_COLORIZATION=false
+export IN_LOG_SERIALIZATION=json-compact
+export IN_POSTGRES_INSTANCE_TYPE=db.m4.large
+export IN_POSTGRES_MULTI_AZ=true
+
+export IN_SFTP_KEY=$(
+  openssl aes-256-cbc -d                             \
+                      -K $encrypted_1c1da7edf167_key \
+                      -iv $encrypted_1c1da7edf167_iv \
+                      -in sftp-server/production.key.enc
+)

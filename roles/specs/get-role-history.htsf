@@ -1,0 +1,39 @@
+> GET http://roles-api/roles/admin/history HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Role-Id: admin
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "301da05435e040e18fde79442c88f7529b7d94dba68b413bcdda756ef6aa2fa0",
+<       "role-id": "admin"
+<     },
+<     "body": {
+<       "name": "Administrator",
+<       "description": "This has all actions",
+<       "actions": [
+<         "*:*"
+<       ]
+<     }
+<   },
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "c517d275757cb6ba8d9695bcdf70aaadd3967eb6e2d22a5ca14913fcfe004179",
+<       "role-id": "admin"
+<     },
+<     "body": {
+<       "name": "Administrator",
+<       "description": "This can perform all actions",
+<       "actions": [
+<         "*:*"
+<       ]
+<     }
+<   }
+< ]

@@ -1,0 +1,53 @@
+> POST http://identities-api/identities HTTP/1.1
+> Content-Type: application/json
+>
+> {
+>   "name": "John Doe",
+>   "email": "john.doe.8@email.com",
+>   "variant": "password",
+>   "variations": {
+>     "password": "password"
+>   }
+> }
+
+< HTTP/1.1 201 Created
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+< In-Etag: 418dfb31396dbd02064f8a55576d96366520e454595daa4fd6996f19fe4c6284
+< In-Identity-Id: ⧆identity-id⧆:b62:22⧆
+< In-Variation-Version: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+<
+< {
+<   "name": "John Doe",
+<   "email": "john.doe.8@email.com",
+<   "variant": "password",
+<   "variations": {}
+< }
+
+> GET http://identities-api/identities/⧈identity-id⧈/history HTTP/1.1
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Identity-Id: ⧈identity-id⧈
+<
+< [
+<   {
+<     "head": {
+<       "created-at": ⧆⧆:iso8601:µs:z⧆,
+<       "etag": "418dfb31396dbd02064f8a55576d96366520e454595daa4fd6996f19fe4c6284",
+<       "identity-id": "⧈identity-id⧈",
+<       "variation-version": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
+<     },
+<     "body": {
+<       "name": "John Doe",
+<       "email": "john.doe.8@email.com",
+<       "variant": "password",
+<       "variations": {}
+<     }
+<   }
+< ]

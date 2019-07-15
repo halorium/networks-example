@@ -1,0 +1,6 @@
+#!/bin/bash
+
+http-spec authentication/specs/get-debug-pprof.htsf \
+          authentication/specs/get-status.htsf      || exit 1
+
+exit 0

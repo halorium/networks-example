@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ $(uname) = "Darwin" ]]; then
+  cp /usr/local/etc/openssl/cert.pem ca-certificates.crt    || exit 1
+else
+  cp /etc/ssl/certs/ca-certificates.crt ca-certificates.crt || exit 1
+fi
+
+exit 0

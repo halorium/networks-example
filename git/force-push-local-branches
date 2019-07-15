@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for branch in $(git/local-branches-master-first-current-last); do
+  [[ "$branch" = "master" ]] && continue
+
+  git checkout $branch || exit 1
+  git push -f          || exit 1
+done || exit 1
+
+exit 0

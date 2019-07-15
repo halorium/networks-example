@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BYTES=($(echo $IN_SUBNET_CIDR_BLOCKS | tr "." "\n"))
+
+echo ${BYTES[0]}.${BYTES[1]}.${BYTES[2]}
+
+exit 0

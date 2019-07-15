@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo pruning http-spec-service image...
+
+docker images              | \
+egrep 'http-spec-service'  | \
+awk '{print $3}'           | \
+compatibility/xargs          \
+docker rmi -f &> /dev/null || exit 1
+
+exit 0

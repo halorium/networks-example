@@ -1,0 +1,11 @@
+#!/bin/bash
+
+>&2 echo deploying from travis-ci...
+
+source travis-ci/export-env-vars
+
+mkdir $IN_ARTIFACTS_PATH || exit 1
+
+./deploy                 || exit 1
+
+exit 0

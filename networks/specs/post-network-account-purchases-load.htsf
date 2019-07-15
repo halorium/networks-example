@@ -1,0 +1,118 @@
+> POST http://networks-api/networks/123/accounts/456/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-01T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 202 Accepted
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "start-time": "2017-01-01T00:00:00.000000Z",
+<   "stop-time": "2017-01-01T23:59:59.999999Z"
+< }
+
+> POST http://networks-api/networks/123/accounts/456/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-02T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "range must be 1 day(s) or less"
+<     }
+<   ]
+< }
+
+> POST http://networks-api/networks/invalid/accounts/456/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-01T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> POST http://networks-api/networks/123/accounts/invalid/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "2017-01-01T00:00:00.000000Z",
+>   "stop-time": "2017-01-01T23:59:59.999999Z"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> POST http://networks-api/networks/123/accounts/456/purchases/load HTTP/1.1
+>
+> {
+>   "start-time": "invalid",
+>   "stop-time": "invalid"
+> }
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "time fields must be formatted as 2006-01-02T15:04:05.000000Z"
+<     }
+<   ]
+< }
+
+> POST http://networks-api/networks/123/accounts/456/purchases/load HTTP/1.1
+>
+> {}
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "start-time must be formatted as 2006-01-02T15:04:05.000000Z"
+<     },
+<     {
+<       "error": "stop-time must be formatted as 2006-01-02T15:04:05.000000Z"
+<     }
+<   ]
+< }
+
+> POST http://networks-api/networks/123/accounts/456/purchases/load HTTP/1.1
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "malformed body"
+<     }
+<   ]
+< }

@@ -1,0 +1,16 @@
+{{{define "postgres-from-private-security-group-ingress"}}}
+"PostgresFromPrivateSecurityGroupIngress": {
+  "Type": "AWS::EC2::SecurityGroupIngress",
+  "Properties": {
+    "GroupId": {
+      "Ref": "PrivateSecurityGroup"
+    },
+    "IpProtocol": "tcp",
+    "FromPort": 5432,
+    "ToPort": 5432,
+    "SourceSecurityGroupId": {
+      "Ref": "PrivateSecurityGroup"
+    }
+  }
+}
+{{{end}}}

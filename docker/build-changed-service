@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SERVICE_PATH=$1
+SERVICE_NAME=$(docker/hyphenate-pathname $SERVICE_PATH) || exit 1
+
+IMAGE=$(docker images | grep $SERVICE_NAME)
+MODIFIED=$(git status -s $SERVICE_PATH)
+
+if [[ "$IMAGE" != "" ]] && [[ "$MODIFIED" == "" ]]; then
+  >&2 echo skip building $SERVICE_NAME...
+  exit 0
+fi
+
+docker/build-service $SERVICE_PATH                      || exit 1
+
+exit 0

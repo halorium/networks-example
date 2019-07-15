@@ -1,0 +1,19 @@
+#!/bin/bash
+
+pip install --user virtualenv              || exit 1
+
+virtualenv  --no-site-packages certbot-env || exit 1
+
+source certbot-env/bin/activate
+
+pip install --upgrade pip                  || exit 1
+
+pip install awscli                         \
+            certbot>=0.22.0                \
+            certbot-external-auth          \
+            docker-compose                 \
+            ndg_httpsclient                || exit 1
+
+aws/create-cli-config                      || exit 1
+
+exit 0

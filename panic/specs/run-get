@@ -1,0 +1,6 @@
+#!/bin/bash
+
+http-spec panic/specs/get-status.htsf \
+          panic/specs/get-panic.htsf  || exit 1
+
+exit 0

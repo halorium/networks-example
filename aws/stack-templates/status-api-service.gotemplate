@@ -1,0 +1,40 @@
+{{{define "status-api-service"}}}
+"StatusApiService": {
+  "DependsOn": [
+    "StatusApiListenerRule",
+    "StatusApiTargetGroup"
+  ],
+  "Type": "AWS::ECS::Service",
+  "Properties": {
+    "Cluster": {
+      "Ref": "Cluster"
+    },
+    "DeploymentConfiguration": {
+      "MaximumPercent": "200",
+      "MinimumHealthyPercent": "50"
+    },
+    "DesiredCount": 4,
+    "LoadBalancers": [
+      {
+        "ContainerName": "status-api",
+        "ContainerPort": "443",
+        "TargetGroupArn": {
+          "Ref": "StatusApiTargetGroup"
+        }
+      }
+    ],
+    "PlacementStrategies": [
+      {
+        "Type": "spread",
+        "Field": "attribute:ecs.availability-zone"
+      }
+    ],
+    "Role": {
+      "Ref": "ServiceRole"
+    },
+    "TaskDefinition": {
+      "Ref": "StatusApiTask"
+    }
+  }
+}
+{{{end}}}

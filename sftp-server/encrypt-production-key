@@ -1,0 +1,6 @@
+#!/bin/bash
+
+travis encrypt-file sftp-server/production.key sftp-server/production.key.enc || exit 1
+rm sftp-server/production.key                                                 || exit 1
+
+exit 0

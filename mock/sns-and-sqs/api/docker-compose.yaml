@@ -1,0 +1,4 @@
+version: '2'
+services:
+  mock-sns-and-sqs-api:
+    image: networks-example/mock-sns-and-sqs-api

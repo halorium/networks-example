@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ $(uname) = "Darwin" ]]; then
+  shasum --algorithm 256 $@ || exit 1
+else
+  sha256sum $@              || exit 1
+fi
+
+exit 0

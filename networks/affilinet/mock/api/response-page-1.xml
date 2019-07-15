@@ -1,0 +1,59 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetTransactionsResponse xmlns="http://affilinet.framework.webservices/Svc">
+      <TotalRecords>3</TotalRecords>
+      <TransactionCollection xmlns:a="http://affilinet.framework.webservices/types/PublisherStatistics" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <a:Transaction>
+          <a:BasketInfo>
+            <a:BasketId>306454576</a:BasketId>
+            <a:OpenBasketItemCount>1</a:OpenBasketItemCount>
+            <a:RegisteredNetPrice>80.33</a:RegisteredNetPrice>
+            <a:TotalBasketItemCount>1</a:TotalBasketItemCount>
+          </a:BasketInfo>
+          <a:CancellationReason i:nil="true"/>
+          <a:CheckDate i:nil="true"/>
+          <a:ClickDate>2017-04-23T22:08:57</a:ClickDate>
+          <a:CreativeInfo>
+            <a:CreativeNumber>1</a:CreativeNumber>
+            <a:CreativeType>Text</a:CreativeType>
+          </a:CreativeInfo>
+          <a:NetPrice>80.33</a:NetPrice>
+          <a:ProgramId>10043</a:ProgramId>
+          <a:ProgramTitle>Holiday Autos</a:ProgramTitle>
+          <a:PublisherCommission>4.02</a:PublisherCommission>
+          <a:RateInfo i:nil="true"/>
+          <a:RegistrationDate>2017-04-23T22:25:50</a:RegistrationDate>
+          <a:SubId>t594664770m</a:SubId>
+          <a:TrackingMethod>PostClick</a:TrackingMethod>
+          <a:TransactionId>285092489</a:TransactionId>
+          <a:TransactionStatus>Open</a:TransactionStatus>
+        </a:Transaction>
+        <a:Transaction>
+          <a:BasketInfo>
+            <a:BasketId>306410716</a:BasketId>
+            <a:OpenBasketItemCount>1</a:OpenBasketItemCount>
+            <a:RegisteredNetPrice>2231.98</a:RegisteredNetPrice>
+            <a:TotalBasketItemCount>1</a:TotalBasketItemCount>
+          </a:BasketInfo>
+          <a:CancellationReason i:nil="true"/>
+          <a:CheckDate i:nil="true"/>
+          <a:ClickDate>2017-04-23T15:21:27</a:ClickDate>
+          <a:CreativeInfo>
+            <a:CreativeNumber>1</a:CreativeNumber>
+            <a:CreativeType>Text</a:CreativeType>
+          </a:CreativeInfo>
+          <a:NetPrice>2231.98</a:NetPrice>
+          <a:ProgramId>9415</a:ProgramId>
+          <a:ProgramTitle>Thomas Cook UK</a:ProgramTitle>
+          <a:PublisherCommission>55.8</a:PublisherCommission>
+          <a:RateInfo i:nil="true"/>
+          <a:RegistrationDate>2017-04-23T15:31:45</a:RegistrationDate>
+          <a:SubId>t594661838m</a:SubId>
+          <a:TrackingMethod>PostClick</a:TrackingMethod>
+          <a:TransactionId>285053963</a:TransactionId>
+          <a:TransactionStatus>Open</a:TransactionStatus>
+        </a:Transaction>
+      </TransactionCollection>
+    </GetTransactionsResponse>
+  </s:Body>
+</s:Envelope>

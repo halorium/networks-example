@@ -1,0 +1,116 @@
+#!/bin/bash
+
+>&2 echo getting credentials for acme challenge...
+
+# Documentation for the following certbot command line options
+# certonly
+
+# --agree-tos
+# Agree to the ACME server's Subscriber Agreement
+
+# --certbot-external-auth:out-public-ip-logging-ok
+# https://github.com/EnigmaBridge/certbot-external-auth
+# Skips public IP query check, required for JSON mode
+# JSON mode (default) produces one-line JSON objects (\n separated) with a challenge to
+# process by the invoker on the STDOUT. After the challenge is processed,
+# the invoker is supposed to send a new line \n character to the STDIN to
+# continue with the process.
+
+# --config-dir tls/certbot-files
+# Configuration directory. (default: /etc/letsencrypt)
+
+# --configurator certbot-external-auth:out
+# Name of the plugin that is both an authenticator and an installer.
+# Should not be used together with --authenticator or --installer.
+# We are using a thrid party plugin as Authenticator and Installer.
+
+# --cert-name wildcard
+# Certificate name to apply. This name is used by Certbot for housekeeping and
+# in file paths; it doesn't affect the content of the certificate itself.
+# To see certificate names, run 'certbot certificates'. When creating a new
+# certificate, specifies the new certificate's name.
+# (default: the first provided domain or the name of an existing certificate
+# on your system for the same domains)
+
+# --domains *.v1.networksexample.com
+# Domain names to apply.
+# For multiple domains you can use multiple -d (--domains, --domain) flags or enter a
+# comma separated list of domains as a parameter. The first provided domain
+# will be used in some software user interfaces and file paths for the
+# certificate and related material unless otherwise specified or you already
+# have a certificate for the same domains.
+
+# --email letsencrypt@networksexample.com
+# Email used for registration and recovery contact.
+
+# --logs-dir tls/certbot-logs
+# Logs directory. (default: /var/log/letsencrypt)
+
+# --no-eff-email
+# Don't share your e-mail address with EFF (default: None)
+
+# --preferred-challenges dns
+# A sorted, comma delimited list of the preferred challenge to use during
+# authorization with the most preferred challenge listed first
+# (Eg, "dns" or "tls-sni-01,http,dns"). Not all plugins support all challenges.
+# See https://certbot.eff.org/docs/using.html#plugins for details.
+# ACME Challenges are versioned, but if you pick "http" rather than "http-01",
+# Certbot will select the latest version automatically. (default: [])
+
+# --renew-by-default
+# If a certificate already exists for the requested domains, renew it now,
+# regardless of whether it is near expiry. (Often --keep-until-expiring is more
+# appropriate). Also implies --expand. (default: False)
+
+# --work-dir work-dir
+# Working directory. (default: /var/lib/letsencrypt)
+
+
+# TODO: add --test-cert flag during development!
+
+coproc                                                          \
+  certbot                                                       \
+    certonly                                                    \
+      --server https://acme-v02.api.letsencrypt.org/directory   \
+      --agree-tos                                               \
+      --certbot-external-auth:out-public-ip-logging-ok          \
+      --config-dir tls/certbot-files                            \
+      --configurator certbot-external-auth:out                  \
+      --cert-name wildcard                                      \
+      --domains *.v1.networksexample.com                      \
+      --email letsencrypt@networksexample.com                 \
+      --logs-dir tls/certbot-logs                               \
+      --no-eff-email                                            \
+      --preferred-challenges dns                                \
+      --renew-by-default                                        \
+      --work-dir work-dir                                       || exit 1
+
+IFS=
+
+read -r CREDENTIAL <&"${COPROC[0]}"                             || exit 1
+
+# parse the domain and validation values from the json
+TXT_DOMAIN=$(echo $CREDENTIAL | jq --raw-output '.txt_domain')  || exit 1
+VALIDATION=$(echo $CREDENTIAL | jq --raw-output '.validation')  || exit 1
+
+>&2 echo putting acme dns credential...
+
+aws/put-dns $TXT_DOMAIN           \
+            TXT                   \
+            "\\\"$VALIDATION\\\"" \
+            1                                                   || exit 1
+
+>&2 echo getting tls files from letsencrypt...
+
+echo >&"${COPROC[1]}"                                           || exit 1
+read -r BLACK_HOLE <&"${COPROC[0]}"                             || exit 1
+cat <&"${COPROC[0]}" >/dev/null                                 || exit 1
+
+>&2 echo deleting acme dns credential...
+
+aws/delete-dns $TXT_DOMAIN           \
+               TXT                   \
+               "\\\"$VALIDATION\\\"" \
+               1                                                || exit 1
+
+exit 0

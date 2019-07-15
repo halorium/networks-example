@@ -1,0 +1,76 @@
+> POST http://authentication-api/authentication HTTP/1.1
+> Authorization: Basic am9obi5kb2UuMUBlbWFpbC5jb206cGFzc3dvcmQ=
+>
+
+< HTTP/1.1 200 OK
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+< In-Created-At: ⧆⧆:iso8601:µs:z⧆
+<
+< {
+<   "authorization": "⧆⧆Bearer [^"]+⧆"
+< }
+
+> POST http://authentication-api/authentication HTTP/1.1
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> POST http://authentication-api/authentication HTTP/1.1
+> Authorization: invalid
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> POST http://authentication-api/authentication HTTP/1.1
+> Authorization: Basic aW52YWxpZA==
+>
+
+< HTTP/1.1 400 Bad Request
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+
+> POST http://authentication-api/authentication HTTP/1.1
+> Authorization: Basic d3JvbmcuZW1haWxAZW1haWwuY29tOnBhc3N3b3Jk
+>
+
+< HTTP/1.1 401 Unauthorized
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "invalid authentication"
+<     }
+<   ]
+< }
+
+> POST http://authentication-api/authentication HTTP/1.1
+> Authorization: Basic am9obi5kb2UuMUBlbWFpbC5jb206aW52YWxpZA==
+>
+
+< HTTP/1.1 401 Unauthorized
+< Content-Length: ⧆⧆\d+⧆
+< Content-Type: application/json; charset=utf-8
+< Date: ⧆⧆:date⧆
+<
+< {
+<   "errors": [
+<     {
+<       "error": "invalid authentication"
+<     }
+<   ]
+< }

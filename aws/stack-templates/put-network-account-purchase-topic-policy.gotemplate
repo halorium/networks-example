@@ -1,0 +1,39 @@
+{{{define "put-network-account-purchase-topic-policy"}}}
+"PutNetworkAccountPurchaseTopicPolicy": {
+  "DependsOn": [
+    "PutNetworkAccountPurchaseTopic"
+  ],
+  "Type": "AWS::SNS::TopicPolicy",
+  "Properties": {
+    "PolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": [
+              {
+                "Fn::GetAtt": [
+                  "TaskRole",
+                  "Arn"
+                ]
+              }
+            ]
+          },
+          "Action": [
+            "sns:Publish"
+          ],
+          "Resource": {
+            "Ref": "PutNetworkAccountPurchaseTopic"
+          }
+        }
+      ]
+    },
+    "Topics": [
+      {
+        "Ref": "PutNetworkAccountPurchaseTopic"
+      }
+    ]
+  }
+}
+{{{end}}}
